@@ -110,6 +110,8 @@
 @property (nonatomic) float height;
 @property(retain, nonatomic) UIImagePickerController *ImagePicker;
 @property(nonatomic) BOOL didPickImage;
+@property(nonatomic) BOOL hasInitializedIcons;
+@property (retain, nonatomic) IBOutlet UIView *locationBackground;
 
 - (IBAction)startUpTour:(id)sender;
 - (IBAction)startDownTour:(id)sender;

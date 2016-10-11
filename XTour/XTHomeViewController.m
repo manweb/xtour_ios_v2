@@ -274,6 +274,17 @@
     
     _mapHasMoved = false;
     
+    _locationBackground.backgroundColor = [UIColor clearColor];
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = _locationBackground.bounds;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[[UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:0.0] CGColor],
+                       (id)[[UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0] CGColor], nil];
+    gradient.startPoint = CGPointMake(0.5, 0.0); // default; bottom of the view
+    gradient.endPoint = CGPointMake(0.5, 1.0);   // default; top of the view
+    [_locationBackground.layer insertSublayer:gradient atIndex:0];
+    
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *centerBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     centerBlurView.frame = CGRectMake(0, 0, 120, 30);
@@ -281,7 +292,7 @@
     centerBlurView.layer.cornerRadius = 5.0f;
     centerBlurView.clipsToBounds = YES;
     
-    _centerView = [[UIView alloc] initWithFrame:CGRectMake(_width/2-60, _height-tabBarHeight-40, 120, 30)];
+    _centerView = [[UIView alloc] initWithFrame:CGRectMake(_width/2-60, 320, 120, 30)];
     
     _centerView.backgroundColor = [UIColor clearColor];
     _centerView.layer.cornerRadius = 5.0f;
@@ -306,26 +317,26 @@
     [self.view addSubview:_centerView];
     
     UIVisualEffectView *addWarningBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    addWarningBlurView.frame = CGRectMake(0, 0, 40, 40);
+    addWarningBlurView.frame = CGRectMake(0, 0, 50, 50);
     addWarningBlurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    addWarningBlurView.layer.cornerRadius = 20.0f;
+    addWarningBlurView.layer.cornerRadius = 25.0f;
     addWarningBlurView.clipsToBounds = YES;
     
-    _addWarningBackground = [[UIView alloc] initWithFrame:CGRectMake(_width-50, 80, 40, 40)];
+    _addWarningBackground = [[UIView alloc] initWithFrame:CGRectMake(_width+60, 90, 50, 50)];
     
     _addWarningBackground.backgroundColor = [UIColor clearColor];
-    _addWarningBackground.layer.cornerRadius = 20.0f;
+    _addWarningBackground.layer.cornerRadius = 25.0f;
     
-    _addWarningButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
+    _addWarningButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
     
     [_addWarningButton setImage:[UIImage imageNamed:@"add_warning_icon@3x.png"] forState:UIControlStateNormal];
     [_addWarningButton addTarget:self action:@selector(AddWarning:) forControlEvents:UIControlEventTouchUpInside];
     
-    _addWarningText = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, 250, 30)];
+    _addWarningText = [[UITextView alloc] initWithFrame:CGRectMake(10, 5, 250, 40)];
     
     _addWarningText.text = @"Klicke auf die Karte für midestens 2s um eine Gefahrenstelle zu markieren.";
     _addWarningText.textColor = [UIColor whiteColor];
-    _addWarningText.font = [UIFont fontWithName:@"Helvetica" size:12];
+    _addWarningText.font = [UIFont fontWithName:@"Helvetica" size:14];
     _addWarningText.contentInset = UIEdgeInsetsMake(-8, 0, 0, 0);
     _addWarningText.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0];
     
@@ -339,19 +350,19 @@
     [addWarningBlurView release];
     
     UIVisualEffectView *changeMapBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    changeMapBlurView.frame = CGRectMake(0, 0, 40, 40);
+    changeMapBlurView.frame = CGRectMake(0, 0, 50, 50);
     changeMapBlurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    changeMapBlurView.layer.cornerRadius = 20.0f;
+    changeMapBlurView.layer.cornerRadius = 25.0f;
     changeMapBlurView.clipsToBounds = YES;
     
-    _changeMapBackground = [[UIView alloc] initWithFrame:CGRectMake(_width-50, 130, 40, 40)];
+    _changeMapBackground = [[UIView alloc] initWithFrame:CGRectMake(_width+60, 150, 50, 50)];
     
     _changeMapBackground.backgroundColor = [UIColor clearColor];
-    _changeMapBackground.layer.cornerRadius = 20.0f;
+    _changeMapBackground.layer.cornerRadius = 25.0f;
     
     _changeMap = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    _changeMap.frame = CGRectMake(5, 5, 30, 30);
+    _changeMap.frame = CGRectMake(10, 10, 30, 30);
     [_changeMap setBackgroundImage:[UIImage imageNamed:@"map_type_satellite@3x.png"] forState:UIControlStateNormal];
     [_changeMap addTarget:self action:@selector(ChangeMapType:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -362,19 +373,19 @@
     [changeMapBlurView release];
     
     UIVisualEffectView *addPictureBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    addPictureBlurView.frame = CGRectMake(0, 0, 40, 40);
+    addPictureBlurView.frame = CGRectMake(0, 0, 50, 50);
     addPictureBlurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    addPictureBlurView.layer.cornerRadius = 20.0f;
+    addPictureBlurView.layer.cornerRadius = 25.0f;
     addPictureBlurView.clipsToBounds = YES;
     
-    _addPictureBackground = [[UIView alloc] initWithFrame:CGRectMake(_width-50, 180, 40, 40)];
+    _addPictureBackground = [[UIView alloc] initWithFrame:CGRectMake(_width+60, 210, 50, 50)];
     
     _addPictureBackground.backgroundColor = [UIColor clearColor];
-    _addPictureBackground.layer.cornerRadius = 20.0f;
+    _addPictureBackground.layer.cornerRadius = 25.0f;
     
     _addPictureButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    _addPictureButton.frame = CGRectMake(5, 5, 30, 30);
+    _addPictureButton.frame = CGRectMake(10, 10, 30, 30);
     [_addPictureButton setBackgroundImage:[UIImage imageNamed:@"camera_icon_white@3x.png"] forState:UIControlStateNormal];
     [_addPictureButton addTarget:self action:@selector(LoadCamera:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -516,6 +527,8 @@
     _didRecoverTour = false;
     _writeRecoveryFile = false;
     
+    _hasInitializedIcons = false;
+    
     [data CheckLogin];
     
     // Check whether the recovery file exist. If so, the app may have crashed, so re-load the data
@@ -648,6 +661,8 @@
     [_distanceIcon release];
     [_altitudeIcon release];
     [_locationIcon release];
+    [_locationBackground release];
+    [_locationBackground release];
     [super dealloc];
 }
 
@@ -787,11 +802,27 @@
         CGRect warningFrame = _addWarningBackground.frame;
         CGRect mapFrame = _changeMapBackground.frame;
         
-        _addWarningBackground.frame = CGRectMake(warningFrame.origin.x, 80, warningFrame.size.width, warningFrame.size.height);
+        _addWarningBackground.frame = CGRectMake(warningFrame.origin.x, 90, warningFrame.size.width, warningFrame.size.height);
         
-        _changeMapBackground.frame = CGRectMake(mapFrame.origin.x, 130, mapFrame.size.width, mapFrame.size.height);
+        _changeMapBackground.frame = CGRectMake(mapFrame.origin.x, 150, mapFrame.size.width, mapFrame.size.height);
         
         [_followTourView setHidden:YES];
+    }
+    
+    if (!_hasInitializedIcons) {
+        [UIView animateWithDuration:0.2f delay:1.0f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
+        _addWarningBackground.frame = CGRectMake(_width-60, 90, 50, 50);
+        } completion:nil];
+        
+        [UIView animateWithDuration:0.2f delay:1.05f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
+        _changeMapBackground.frame = CGRectMake(_width-60, 150, 50, 50);
+        } completion:nil];
+        
+        [UIView animateWithDuration:0.2f delay:1.1f options:UIViewAnimationOptionCurveEaseOut animations:^(void) {
+        _addPictureBackground.frame = CGRectMake(_width-60, 210, 50, 50);
+        } completion:nil];
+        
+        _hasInitializedIcons = true;
     }
 }
 
@@ -1609,8 +1640,8 @@
     CGRect addWarningBackgroundFrame = _addWarningBackground.frame;
     
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-        _addWarningBackground.frame = CGRectMake(10, addWarningBackgroundFrame.origin.y, _width-20, 40);
-        _addWarningButton.frame = CGRectMake(_width-55, 5, 30, 30);
+        _addWarningBackground.frame = CGRectMake(10, addWarningBackgroundFrame.origin.y, _width-20, 50);
+        _addWarningButton.frame = CGRectMake(_width-60, 10, 30, 30);
         [_addWarningButton setImage:[UIImage imageNamed:@"cancel_icon@3x.png"] forState:UIControlStateNormal];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
@@ -1629,8 +1660,8 @@
         [_addWarningText setHidden:YES];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            _addWarningBackground.frame = CGRectMake(_width-50, addWarningBackgroundFrame.origin.y, 40, 40);
-            _addWarningButton.frame = CGRectMake(5, 5, 30, 30);
+            _addWarningBackground.frame = CGRectMake(_width-60, addWarningBackgroundFrame.origin.y, 50, 50);
+            _addWarningButton.frame = CGRectMake(10, 10, 30, 30);
             [_addWarningButton setImage:[UIImage imageNamed:@"add_warning_icon@3x.png"] forState:UIControlStateNormal];
         } completion:nil];
     }];

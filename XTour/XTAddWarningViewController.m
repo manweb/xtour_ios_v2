@@ -69,10 +69,11 @@
     _addWarningView.layer.borderColor = [UIColor grayColor].CGColor;
     _addWarningView.backgroundColor = [UIColor whiteColor];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 200, 20)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(width/2-100, 10, 200, 20)];
     
     _titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
     _titleLabel.text = @"Was hat du beobachtet?";
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
     
     _warningComment = [[UITextView alloc] initWithFrame:CGRectMake(20, 90, width-60, 110)];
     [_warningComment setAlpha:0.0f];
@@ -102,7 +103,53 @@
     
     _pickerView.delegate = self;
     
-    [_addWarningView addSubview:_pickerView];
+    _warning1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _warning2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _warning3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _warning4 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _warning5 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    
+    float spaceBetweenIcons = (width-80)/4;
+    
+    _warning1.frame = CGRectMake(10, 40, 40, 40);
+    _warning2.frame = CGRectMake(10+spaceBetweenIcons, 40, 40, 40);
+    _warning3.frame = CGRectMake(10+2*spaceBetweenIcons, 40, 40, 40);
+    _warning4.frame = CGRectMake(10+3*spaceBetweenIcons, 40, 40, 40);
+    _warning5.frame = CGRectMake(10+4*spaceBetweenIcons, 40, 40, 40);
+    
+    [_warning1 setBackgroundImage:[UIImage imageNamed:@"warning_icon_avelange@3x.png"] forState:UIControlStateNormal];
+    [_warning2 setBackgroundImage:[UIImage imageNamed:@"warning_icon_unstable@3x.png"] forState:UIControlStateNormal];
+    [_warning3 setBackgroundImage:[UIImage imageNamed:@"warning_icon_crack@3x.png"] forState:UIControlStateNormal];
+    [_warning4 setBackgroundImage:[UIImage imageNamed:@"warning_icon_falling_rocks@3x.png"] forState:UIControlStateNormal];
+    [_warning5 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    
+    _warning1.tag = 1;
+    _warning2.tag = 2;
+    _warning3.tag = 3;
+    _warning4.tag = 4;
+    _warning5.tag = 5;
+    
+    [_warning1 addTarget:self action:@selector(SelectWarning:) forControlEvents:UIControlEventTouchUpInside];
+    [_warning2 addTarget:self action:@selector(SelectWarning:) forControlEvents:UIControlEventTouchUpInside];
+    [_warning3 addTarget:self action:@selector(SelectWarning:) forControlEvents:UIControlEventTouchUpInside];
+    [_warning4 addTarget:self action:@selector(SelectWarning:) forControlEvents:UIControlEventTouchUpInside];
+    [_warning5 addTarget:self action:@selector(SelectWarning:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _selectedWarning = [[UIView alloc] initWithFrame:CGRectMake(8, 38, 44, 44)];
+    
+    _selectedWarning.backgroundColor = [UIColor clearColor];
+    _selectedWarning.layer.borderWidth = 2.0f;
+    _selectedWarning.layer.borderColor = [[UIColor colorWithRed:41.f/255.f green:127.f/255.f blue:199.f/255.f alpha:1.0] CGColor];
+    _selectedWarning.layer.cornerRadius = 5.0f;
+    [_selectedWarning setHidden:YES];
+    
+    //[_addWarningView addSubview:_pickerView];
+    [_addWarningView addSubview:_warning1];
+    [_addWarningView addSubview:_warning2];
+    [_addWarningView addSubview:_warning3];
+    [_addWarningView addSubview:_warning4];
+    [_addWarningView addSubview:_warning5];
+    [_addWarningView addSubview:_selectedWarning];
     [_addWarningView addSubview:_titleLabel];
     [_addWarningView addSubview:_loginButton];
     [_addWarningView addSubview:_cancelButton];
@@ -157,6 +204,28 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"AddWarningViewDismissedCancel" object:nil userInfo:nil];
     
     [self HideView];
+}
+
+- (void) SelectWarning:(id)sender
+{
+    UIButton *button = sender;
+    
+    long selectedWarning = button.tag - 1;
+    
+    _warning.category = selectedWarning;
+    
+    _titleLabel.text = [_categories objectAtIndex:selectedWarning];
+    
+    if (_selectedWarning.hidden) {
+        _selectedWarning.frame = CGRectMake(button.frame.origin.x - 2, _selectedWarning.frame.origin.y, _selectedWarning.frame.size.width, _selectedWarning.frame.size.height);
+        
+        [_selectedWarning setHidden:NO];
+    }
+    else {
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
+            _selectedWarning.frame = CGRectMake(button.frame.origin.x - 2, _selectedWarning.frame.origin.y, _selectedWarning.frame.size.width, _selectedWarning.frame.size.height);
+        } completion:NULL];
+    }
 }
 
 - (void) animate

@@ -27,6 +27,12 @@
 @property (nonatomic,retain) UIButton *loginButton;
 @property (nonatomic,retain) XTWarningsInfo *warning;
 @property (nonatomic,retain) NSMutableArray *categories;
+@property (nonatomic,retain) UIButton *warning1;
+@property (nonatomic,retain) UIButton *warning2;
+@property (nonatomic,retain) UIButton *warning3;
+@property (nonatomic,retain) UIButton *warning4;
+@property (nonatomic,retain) UIButton *warning5;
+@property (nonatomic,retain) UIView *selectedWarning;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil warningInfo:(XTWarningsInfo *)warning;

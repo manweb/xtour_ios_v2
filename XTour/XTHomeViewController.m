@@ -292,7 +292,7 @@
     centerBlurView.layer.cornerRadius = 5.0f;
     centerBlurView.clipsToBounds = YES;
     
-    _centerView = [[UIView alloc] initWithFrame:CGRectMake(_width/2-60, 320, 120, 30)];
+    _centerView = [[UIView alloc] initWithFrame:CGRectMake(_width/2-60, 300, 120, 30)];
     
     _centerView.backgroundColor = [UIColor clearColor];
     _centerView.layer.cornerRadius = 5.0f;
@@ -396,23 +396,23 @@
     [addPictureBlurView release];
     
     UIVisualEffectView *followTourBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    followTourBlurView.frame = CGRectMake(0, 0, _width-20, 52);
+    followTourBlurView.frame = CGRectMake(0, 0, _width-80, 52);
     followTourBlurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     followTourBlurView.layer.cornerRadius = 5.0f;
     followTourBlurView.clipsToBounds = YES;
     
-    _followTourView = [[UIView alloc] initWithFrame:CGRectMake(10, 75, _width-20, 52)];
+    _followTourView = [[UIView alloc] initWithFrame:CGRectMake(10, 30, _width-80, 52)];
     
     _followTourView.backgroundColor = [UIColor clearColor];
     _followTourView.layer.cornerRadius = 5.0f;
     
-    _followTourTitle = [[UILabel alloc] initWithFrame:CGRectMake(5, 3, _width-80, 16)];
+    _followTourTitle = [[UILabel alloc] initWithFrame:CGRectMake(5, 3, _width-90, 16)];
     
     _followTourTitle.textColor = [UIColor whiteColor];
     _followTourTitle.font = [UIFont fontWithName:@"Helvetica" size:12.0f];
     _followTourTitle.text = @"Hinzugefügte Tour";
     
-    float labelWidth = (_width-70)/3;
+    float labelWidth = (_width-110)/3;
     
     _followTourTime = [[UILabel alloc] initWithFrame:CGRectMake(5, 20, labelWidth-5, 16)];
     
@@ -431,7 +431,7 @@
     
     _removeFollowTour = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    _removeFollowTour.frame = CGRectMake(_width-55, 11, 30, 30);
+    _removeFollowTour.frame = CGRectMake(_width-105, 5, 20, 20);
     [_removeFollowTour setBackgroundImage:[UIImage imageNamed:@"cancel_icon@3x.png"] forState:UIControlStateNormal];
     [_removeFollowTour addTarget:self action:@selector(RemoveFollowTour:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -778,13 +778,6 @@
         _followTourAltitude.text = [NSString stringWithFormat:@"%.1fm",data.followTourInfo.altitude];
         
         if (_followTourView.hidden) {
-            CGRect warningFrame = _addWarningBackground.frame;
-            CGRect mapFrame = _changeMapBackground.frame;
-            
-            _addWarningBackground.frame = CGRectMake(warningFrame.origin.x, warningFrame.origin.y+57, warningFrame.size.width, warningFrame.size.height);
-            
-            _changeMapBackground.frame = CGRectMake(mapFrame.origin.x, mapFrame.origin.y+57, mapFrame.size.width, mapFrame.size.height);
-            
             [_upLineView setHidden:NO];
             [_upLineLabel setHidden:NO];
             
@@ -799,13 +792,6 @@
         }
     }
     else {
-        CGRect warningFrame = _addWarningBackground.frame;
-        CGRect mapFrame = _changeMapBackground.frame;
-        
-        _addWarningBackground.frame = CGRectMake(warningFrame.origin.x, 90, warningFrame.size.width, warningFrame.size.height);
-        
-        _changeMapBackground.frame = CGRectMake(mapFrame.origin.x, 150, mapFrame.size.width, mapFrame.size.height);
-        
         [_followTourView setHidden:YES];
     }
     
@@ -1424,6 +1410,8 @@
             
             [self UpdateDisplayWithLocation:Location];
             
+            [self UpdateMap:Location];
+            
             NSString *requestString = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_warnings_string.php?radius=%f&longitude=%f&latitude=%f", data.profileSettings.warningRadius, Location.coordinate.longitude, Location.coordinate.latitude];
             NSURL *url = [NSURL URLWithString:requestString];
             
@@ -1699,12 +1687,7 @@
         [_followTourView setAlpha:0.0];
         
         [_followTourView setHidden:YES];
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            _addWarningBackground.frame = CGRectMake(_width-50, 80, 40, 40);
-            _changeMapBackground.frame = CGRectMake(_width-50, 130, 40, 40);
-        } completion:nil];
-    }];
+    } completion:NULL];
 }
 
 - (void) LoadCamera:(id)sender

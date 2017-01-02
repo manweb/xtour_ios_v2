@@ -704,14 +704,34 @@
         
         GMSPolyline *polyline = [[GMSPolyline alloc] init];
         [polyline setPath:currentPath];
-        if ([[_tourFiles objectAtIndex:i] containsString:@"up"]) {polyline.strokeColor = [UIColor blueColor];}
-        else {polyline.strokeColor = [UIColor redColor];}
-        polyline.strokeWidth = 5.f;
+        if ([[_tourFiles objectAtIndex:i] containsString:@"up"]) {polyline.strokeColor = [UIColor colorWithRed:41.0f/255.0f green:127.0f/255.0f blue:199.0f/255.0f alpha:1.0f];}
+        else {polyline.strokeColor = [UIColor colorWithRed:199.0f/255.0f green:74.0F/255.0f blue:41.0f/255.0f alpha:1.0f];}
+        polyline.strokeWidth = 3.f;
         
         [polylines addObject:polyline];
         GMSPolyline *currentPolyline = [polylines objectAtIndex:i];
         
         currentPolyline.map = mapView;
+    }
+    
+    GMSMarker *startPoint = [[GMSMarker alloc] init];
+    
+    startPoint.position = CLLocationCoordinate2DMake(tourInfo.latitude, tourInfo.longitude);
+    startPoint.icon = [UIImage imageNamed:@"markerIcon_green@3x.png"];
+    startPoint.groundAnchor = CGPointMake(0.5,0.5);
+    startPoint.map = mapView;
+    
+    if ([_coordinateArray count] == 1) {
+        NSMutableArray *coordinate = [_coordinateArray objectAtIndex:0];
+        
+        CLLocation *location = [coordinate lastObject];
+        
+        GMSMarker *startPoint = [[GMSMarker alloc] init];
+        
+        startPoint.position = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+        startPoint.icon = [UIImage imageNamed:@"markerIcon_red@3x.png"];
+        startPoint.groundAnchor = CGPointMake(0.5,0.5);
+        startPoint.map = mapView;
     }
     
     GMSCameraUpdate *cameraUpdate = [GMSCameraUpdate fitBounds:[[GMSCoordinateBounds alloc]initWithCoordinate:CLLocationCoordinate2DMake(minLat, minLon) coordinate:CLLocationCoordinate2DMake(maxLat, maxLon)] withPadding:50.0f];

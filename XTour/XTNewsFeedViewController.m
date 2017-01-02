@@ -902,7 +902,7 @@ static NSString * const reuseIdentifier = @"Cell";
         [_previewGraphView setAlpha:previewGraphViewAlpha];
         
         if (previewMapViewAlpha > 0 && !_mapWasShown) {
-            [self LoadTourCoordinates:_currentPreviewTour.tourID];
+            [self LoadTourCoordinates:_currentPreviewTour];
             
             _mapWasShown = true;
         }
@@ -983,8 +983,10 @@ static NSString * const reuseIdentifier = @"Cell";
     return cellFrame;
 }
 
-- (void) LoadTourCoordinates:(NSString *)tourID
+- (void) LoadTourCoordinates:(XTTourInfo*)tourInfo
 {
+    NSString *tourID = tourInfo.tourID;
+    
     [_loadingView setHidden:NO];
     
     NSString *requestString = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_tour_coordinates_string.php?tid=%@", tourID];
@@ -1033,14 +1035,34 @@ static NSString * const reuseIdentifier = @"Cell";
             
             GMSPolyline *polyline = [[GMSPolyline alloc] init];
             [polyline setPath:currentPath];
-            if ([[tourFiles objectAtIndex:i] containsString:@"up"]) {polyline.strokeColor = [UIColor blueColor];}
-            else {polyline.strokeColor = [UIColor redColor];}
-            polyline.strokeWidth = 5.f;
+            if ([[tourFiles objectAtIndex:i] containsString:@"up"]) {polyline.strokeColor = [UIColor colorWithRed:41.0f/255.0f green:127.0f/255.0f blue:199.0f/255.0f alpha:1.0f];}
+            else {polyline.strokeColor = [UIColor colorWithRed:199.0f/255.0f green:74.0F/255.0f blue:41.0f/255.0f alpha:1.0f];}
+            polyline.strokeWidth = 3.f;
             
             [_polylines addObject:polyline];
             GMSPolyline *currentPolyline = [_polylines objectAtIndex:i];
             
             currentPolyline.map = _map;
+        }
+        
+        GMSMarker *startPoint = [[GMSMarker alloc] init];
+        
+        startPoint.position = CLLocationCoordinate2DMake(tourInfo.latitude, tourInfo.longitude);
+        startPoint.icon = [UIImage imageNamed:@"markerIcon_green@3x.png"];
+        startPoint.groundAnchor = CGPointMake(0.5,0.5);
+        startPoint.map = _map;
+        
+        if ([coordinateArray count] == 1) {
+            NSMutableArray *coordinate = [coordinateArray objectAtIndex:0];
+            
+            CLLocation *location = [coordinate lastObject];
+            
+            GMSMarker *startPoint = [[GMSMarker alloc] init];
+            
+            startPoint.position = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+            startPoint.icon = [UIImage imageNamed:@"markerIcon_red@3x.png"];
+            startPoint.groundAnchor = CGPointMake(0.5,0.5);
+            startPoint.map = _map;
         }
         
         GMSCameraUpdate *cameraUpdate = [GMSCameraUpdate fitBounds:[[GMSCoordinateBounds alloc]initWithCoordinate:CLLocationCoordinate2DMake(minLat, minLon) coordinate:CLLocationCoordinate2DMake(maxLat, maxLon)] withPadding:50.0f];
@@ -1059,6 +1081,8 @@ static NSString * const reuseIdentifier = @"Cell";
         
         currentPolyline.map = nil;
     }
+    
+    [_map clear];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

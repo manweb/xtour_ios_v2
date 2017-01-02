@@ -153,6 +153,7 @@
 		64987D761BE95F8E00570C53 /* tour_search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64987D731BE95F8E00570C53 /* tour_search_icon@2x.png */; };
 		64987D771BE95F8E00570C53 /* tour_search_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64987D741BE95F8E00570C53 /* tour_search_icon@3x.png */; };
 		649B06D21C3533B700870975 /* dots_icon_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 649B06D11C3533B700870975 /* dots_icon_white@3x.png */; };
+		649F9F2E1DC83BCC00B175A4 /* skier_up_button v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 649F9F2D1DC83BCC00B175A4 /* skier_up_button v2.png */; };
 		64A1E0001AE47D6A00403950 /* profile_icon_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64A1DFFF1AE47D6A00403950 /* profile_icon_small@3x.png */; };
 		64A1E0021AE47D9E00403950 /* news_feed_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64A1E0011AE47D9E00403950 /* news_feed_icon@3x.png */; };
 		64A1E0041AE4800D00403950 /* settings_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64A1E0031AE4800D00403950 /* settings_icon@3x.png */; };
@@ -162,6 +163,8 @@
 		64A7B47618B1F508004E4B2F /* skier_down_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 64A7B47518B1F508004E4B2F /* skier_down_button.png */; };
 		64A7B47C18B1F98E004E4B2F /* pause_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 64A7B47B18B1F98E004E4B2F /* pause_button.png */; };
 		64A7DBA41AA4E44300D8A4C5 /* more_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64A7DBA31AA4E44300D8A4C5 /* more_icon@2x.png */; };
+		64ABD0491DE51AF400CC874B /* pause_button v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 64ABD0481DE51AF400CC874B /* pause_button v2.png */; };
+		64ABD04B1DE51B0D00CC874B /* stop_button v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 64ABD04A1DE51B0D00CC874B /* stop_button v2.png */; };
 		64AD8EFF1B13C6E000960A6C /* XTImageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64AD8EFE1B13C6E000960A6C /* XTImageDetailView.m */; };
 		64ADCD341C91FB4100E8EFDB /* XTCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64ADCD331C91FB4100E8EFDB /* XTCollectionHeaderView.m */; };
 		64B18CF918BD73DA002A5417 /* XTFileUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B18CF818BD73DA002A5417 /* XTFileUploader.m */; };
@@ -194,6 +197,7 @@
 		64CD04FC1B49F1DB004DD801 /* warning_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 64CD04F91B49F1DB004DD801 /* warning_icon.png */; };
 		64CD04FD1B49F1DB004DD801 /* warning_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64CD04FA1B49F1DB004DD801 /* warning_icon@2x.png */; };
 		64CD04FE1B49F1DB004DD801 /* warning_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64CD04FB1B49F1DB004DD801 /* warning_icon@3x.png */; };
+		64D0FC651DF0E1D000B6A332 /* markerIcon_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64D0FC641DF0E1CF00B6A332 /* markerIcon_gray@3x.png */; };
 		64D8C0DC18B556C2001A825E /* clock_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 64D8C0DB18B556C2001A825E /* clock_icon.png */; };
 		64D8C0DE18B5598D001A825E /* item_background_60.png in Resources */ = {isa = PBXBuildFile; fileRef = 64D8C0DD18B5598D001A825E /* item_background_60.png */; };
 		64D8C0E018B55BD1001A825E /* item_background_40.png in Resources */ = {isa = PBXBuildFile; fileRef = 64D8C0DF18B55BD1001A825E /* item_background_40.png */; };
@@ -206,7 +210,12 @@
 		64E3DAD11C1B4B3600B073E6 /* map_type_satellite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E3DAD01C1B4B3600B073E6 /* map_type_satellite@3x.png */; };
 		64E3EB9F18B0200500514CFE /* xtour_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E3EB9E18B0200500514CFE /* xtour_header.png */; };
 		64E3EBA118B020E400514CFE /* profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E3EBA018B020E400514CFE /* profile_icon.png */; };
+		64E839D11DB30BB600BFB748 /* markerIcon_green@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E839CF1DB30BB500BFB748 /* markerIcon_green@3x.png */; };
+		64E839D21DB30BB600BFB748 /* markerIcon_red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E839D01DB30BB500BFB748 /* markerIcon_red@3x.png */; };
 		64E88EE41B0E7B2F002ADF1A /* ski_pole_camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E88EE31B0E7B2F002ADF1A /* ski_pole_camera@3x.png */; };
+		64E975EC1DD2532E00D27DB6 /* skier_down_button v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E975E71DD2532E00D27DB6 /* skier_down_button v2.png */; };
+		64E975ED1DD2532E00D27DB6 /* snowboarder_down_button v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E975E81DD2532E00D27DB6 /* snowboarder_down_button v2.png */; };
+		64E975EE1DD2532E00D27DB6 /* snowboarder_up_button v2.png in Resources */ = {isa = PBXBuildFile; fileRef = 64E975E91DD2532E00D27DB6 /* snowboarder_up_button v2.png */; };
 		64F051E21B13F03F004CEBA1 /* edit_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F051DF1B13F03F004CEBA1 /* edit_icon.png */; };
 		64F051E31B13F03F004CEBA1 /* edit_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F051E01B13F03F004CEBA1 /* edit_icon@2x.png */; };
 		64F051E41B13F03F004CEBA1 /* edit_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F051E11B13F03F004CEBA1 /* edit_icon@3x.png */; };
@@ -414,6 +423,7 @@
 		64987D731BE95F8E00570C53 /* tour_search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tour_search_icon@2x.png"; sourceTree = "<group>"; };
 		64987D741BE95F8E00570C53 /* tour_search_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tour_search_icon@3x.png"; sourceTree = "<group>"; };
 		649B06D11C3533B700870975 /* dots_icon_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dots_icon_white@3x.png"; sourceTree = "<group>"; };
+		649F9F2D1DC83BCC00B175A4 /* skier_up_button v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skier_up_button v2.png"; sourceTree = "<group>"; };
 		64A1DFFF1AE47D6A00403950 /* profile_icon_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_icon_small@3x.png"; sourceTree = "<group>"; };
 		64A1E0011AE47D9E00403950 /* news_feed_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_feed_icon@3x.png"; sourceTree = "<group>"; };
 		64A1E0031AE4800D00403950 /* settings_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@3x.png"; sourceTree = "<group>"; };
@@ -425,6 +435,8 @@
 		64A7B47518B1F508004E4B2F /* skier_down_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skier_down_button.png; path = ../images/skier_down_button.png; sourceTree = "<group>"; };
 		64A7B47B18B1F98E004E4B2F /* pause_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause_button.png; path = ../images/pause_button.png; sourceTree = "<group>"; };
 		64A7DBA31AA4E44300D8A4C5 /* more_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_icon@2x.png"; sourceTree = "<group>"; };
+		64ABD0481DE51AF400CC874B /* pause_button v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause_button v2.png"; sourceTree = "<group>"; };
+		64ABD04A1DE51B0D00CC874B /* stop_button v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop_button v2.png"; sourceTree = "<group>"; };
 		64AD8EFD1B13C6E000960A6C /* XTImageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTImageDetailView.h; sourceTree = "<group>"; };
 		64AD8EFE1B13C6E000960A6C /* XTImageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTImageDetailView.m; sourceTree = "<group>"; };
 		64ADCD321C91FB4100E8EFDB /* XTCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTCollectionHeaderView.h; sourceTree = "<group>"; };
@@ -468,6 +480,7 @@
 		64CD04F91B49F1DB004DD801 /* warning_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning_icon.png; sourceTree = "<group>"; };
 		64CD04FA1B49F1DB004DD801 /* warning_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning_icon@2x.png"; sourceTree = "<group>"; };
 		64CD04FB1B49F1DB004DD801 /* warning_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning_icon@3x.png"; sourceTree = "<group>"; };
+		64D0FC641DF0E1CF00B6A332 /* markerIcon_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "markerIcon_gray@3x.png"; sourceTree = "<group>"; };
 		64D8C0DB18B556C2001A825E /* clock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clock_icon.png; path = ../images/clock_icon.png; sourceTree = "<group>"; };
 		64D8C0DD18B5598D001A825E /* item_background_60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = item_background_60.png; path = ../images/item_background_60.png; sourceTree = "<group>"; };
 		64D8C0DF18B55BD1001A825E /* item_background_40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = item_background_40.png; path = ../images/item_background_40.png; sourceTree = "<group>"; };
@@ -482,7 +495,12 @@
 		64E3DAD01C1B4B3600B073E6 /* map_type_satellite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_type_satellite@3x.png"; sourceTree = "<group>"; };
 		64E3EB9E18B0200500514CFE /* xtour_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = xtour_header.png; path = ../images/xtour_header.png; sourceTree = "<group>"; };
 		64E3EBA018B020E400514CFE /* profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile_icon.png; path = ../images/profile_icon.png; sourceTree = "<group>"; };
+		64E839CF1DB30BB500BFB748 /* markerIcon_green@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "markerIcon_green@3x.png"; path = "images/markerIcon_green@3x.png"; sourceTree = SOURCE_ROOT; };
+		64E839D01DB30BB500BFB748 /* markerIcon_red@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "markerIcon_red@3x.png"; path = "images/markerIcon_red@3x.png"; sourceTree = SOURCE_ROOT; };
 		64E88EE31B0E7B2F002ADF1A /* ski_pole_camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ski_pole_camera@3x.png"; sourceTree = "<group>"; };
+		64E975E71DD2532E00D27DB6 /* skier_down_button v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skier_down_button v2.png"; sourceTree = "<group>"; };
+		64E975E81DD2532E00D27DB6 /* snowboarder_down_button v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snowboarder_down_button v2.png"; sourceTree = "<group>"; };
+		64E975E91DD2532E00D27DB6 /* snowboarder_up_button v2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snowboarder_up_button v2.png"; sourceTree = "<group>"; };
 		64F051DF1B13F03F004CEBA1 /* edit_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit_icon.png; sourceTree = "<group>"; };
 		64F051E01B13F03F004CEBA1 /* edit_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_icon@2x.png"; sourceTree = "<group>"; };
 		64F051E11B13F03F004CEBA1 /* edit_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_icon@3x.png"; sourceTree = "<group>"; };
@@ -726,7 +744,13 @@
 				64F69F9C1BE82AD20065DDDF /* snowboarder_down_button_inactive.png */,
 				64F69F9D1BE82AD20065DDDF /* snowboarder_up_button_inactive.png */,
 				64A7B47B18B1F98E004E4B2F /* pause_button.png */,
+				64ABD0481DE51AF400CC874B /* pause_button v2.png */,
 				648E880218B8402A00BE1AB3 /* stop_button.png */,
+				64ABD04A1DE51B0D00CC874B /* stop_button v2.png */,
+				649F9F2D1DC83BCC00B175A4 /* skier_up_button v2.png */,
+				64E975E71DD2532E00D27DB6 /* skier_down_button v2.png */,
+				64E975E81DD2532E00D27DB6 /* snowboarder_down_button v2.png */,
+				64E975E91DD2532E00D27DB6 /* snowboarder_up_button v2.png */,
 				64D8C0DB18B556C2001A825E /* clock_icon.png */,
 				64D8C0DD18B5598D001A825E /* item_background_60.png */,
 				64D8C0DF18B55BD1001A825E /* item_background_40.png */,
@@ -800,6 +824,9 @@
 				641FD4581BEEA32B002DD407 /* close_icon_black.png */,
 				641FD4591BEEA32B002DD407 /* close_icon_black@2x.png */,
 				641FD45A1BEEA32B002DD407 /* close_icon_black@3x.png */,
+				64E839CF1DB30BB500BFB748 /* markerIcon_green@3x.png */,
+				64E839D01DB30BB500BFB748 /* markerIcon_red@3x.png */,
+				64D0FC641DF0E1CF00B6A332 /* markerIcon_gray@3x.png */,
 				645525991B30D6FB00CA4B15 /* wishlist_icon@3x.png */,
 				64987D721BE95F8E00570C53 /* tour_search_icon.png */,
 				64987D731BE95F8E00570C53 /* tour_search_icon@2x.png */,
@@ -1006,6 +1033,7 @@
 				64935FAA1B77FFC300CD8E4E /* delete_icon@3x.png in Resources */,
 				64A1E0041AE4800D00403950 /* settings_icon@3x.png in Resources */,
 				646C41A81B33D2FF001C6BFB /* cancel_icon@3x.png in Resources */,
+				64D0FC651DF0E1D000B6A332 /* markerIcon_gray@3x.png in Resources */,
 				645181311A27CC2500D887CA /* Icon-Small.png in Resources */,
 				640BBE851887B1A30029327F /* Images.xcassets in Resources */,
 				64C09A8B18B68E16004A230E /* item_background_40_half.png in Resources */,
@@ -1015,6 +1043,7 @@
 				640ECB291B1006F1004E9816 /* rating-star-off@3x.png in Resources */,
 				64D8C0DC18B556C2001A825E /* clock_icon.png in Resources */,
 				64987D751BE95F8E00570C53 /* tour_search_icon.png in Resources */,
+				64E975EC1DD2532E00D27DB6 /* skier_down_button v2.png in Resources */,
 				646C41A71B33D2FF001C6BFB /* cancel_icon@2x.png in Resources */,
 				64865C671C4E06DC000A7801 /* camera_button@3x.png in Resources */,
 				64F5735E1AE301C700BFC7FE /* profile_icon_gray.png in Resources */,
@@ -1045,6 +1074,7 @@
 				6431C4EF1A2EF566007A827F /* GPS_none.png in Resources */,
 				64C2B97B18B87ADE00D4FDE4 /* cog_01@2x.png in Resources */,
 				645525961B30D64700CA4B15 /* cleanup_icon.png in Resources */,
+				64E839D11DB30BB600BFB748 /* markerIcon_green@3x.png in Resources */,
 				64A7DBA41AA4E44300D8A4C5 /* more_icon@2x.png in Resources */,
 				6434706F1ACB703C00C8F916 /* skier_down_icon_2.png in Resources */,
 				645525971B30D64700CA4B15 /* cleanup_icon@2x.png in Resources */,
@@ -1055,7 +1085,9 @@
 				64C2B97D18B87AF300D4FDE4 /* globe@2x.png in Resources */,
 				646C41A11B33D2E9001C6BFB /* add_warning_icon@2x.png in Resources */,
 				6457CC601DAD540B006C1F20 /* warning_icon_avelange@3x.png in Resources */,
+				64E975ED1DD2532E00D27DB6 /* snowboarder_down_button v2.png in Resources */,
 				645B0FAD1B3759D600CA30C0 /* ski_pole_warning@3x.png in Resources */,
+				64ABD04B1DE51B0D00CC874B /* stop_button v2.png in Resources */,
 				641FD45B1BEEA32B002DD407 /* close_icon_black.png in Resources */,
 				6451812C1A27CC2500D887CA /* Icon-40@3x.png in Resources */,
 				6451812E1A27CC2500D887CA /* Icon-60@3x.png in Resources */,
@@ -1076,10 +1108,12 @@
 				641FD4501BEE89F0002DD407 /* close_icon.png in Resources */,
 				6422CC861C60487400C6ED21 /* notification_arrow_up@3x.png in Resources */,
 				64E3EB9F18B0200500514CFE /* xtour_header.png in Resources */,
+				649F9F2E1DC83BCC00B175A4 /* skier_up_button v2.png in Resources */,
 				64CD04FC1B49F1DB004DD801 /* warning_icon.png in Resources */,
 				64B6E5111AC8B0AB0069A1A7 /* skier_down_icon.png in Resources */,
 				646C41A61B33D2FF001C6BFB /* cancel_icon.png in Resources */,
 				64F69F9B1BE829E90065DDDF /* snowboarder_up_button.png in Resources */,
+				64E975EE1DD2532E00D27DB6 /* snowboarder_up_button v2.png in Resources */,
 				641FD4511BEE89F0002DD407 /* close_icon@2x.png in Resources */,
 				640A78161C7310D000F3BC3E /* arrow_up_preview@3x.png in Resources */,
 				6431C4F01A2EF566007A827F /* GPS_strong.png in Resources */,
@@ -1090,6 +1124,7 @@
 				64293D861C06966000D58303 /* peak_finder_icon@3x.png in Resources */,
 				64F69F9A1BE829E90065DDDF /* snowboarder_down_button.png in Resources */,
 				640ECB2B1B1006F1004E9816 /* rating-star-on@2x.png in Resources */,
+				64E839D21DB30BB600BFB748 /* markerIcon_red@3x.png in Resources */,
 				64746CBC189F18270070B8D9 /* XTour_button.png in Resources */,
 				6434706B1ACB6F2E00C8F916 /* distance_icon.png in Resources */,
 				645ADA3F1C52FA57005A1CAB /* comment_icon@3x.png in Resources */,
@@ -1124,6 +1159,7 @@
 				64D8C0E618B55C50001A825E /* compass_icon.png in Resources */,
 				64865C691C4E0AF3000A7801 /* delete_icon_gray@3x.png in Resources */,
 				6480121F18A6FD95000A387E /* button_red.png in Resources */,
+				64ABD0491DE51AF400CC874B /* pause_button v2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

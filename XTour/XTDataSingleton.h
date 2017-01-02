@@ -76,6 +76,7 @@
 @property(nonatomic,retain) XTTourInfo *followTourInfo;
 @property(nonatomic,retain) NSMutableArray *pathSegments;
 @property(nonatomic,retain) NSMutableArray *pathSegmentsPath;
+@property(nonatomic) bool addedNewTrack;
 
 + (XTDataSingleton *) singleObj;
 
@@ -84,7 +85,7 @@
 - (void) ResetAll;
 - (void) AddCoordinate:(CLLocation *)p;
 - (void) AddDistance:(double)dist andHeight:(double)height;
-- (void) AddCurrentPathToSegments;
+- (void) AddCurrentPathToSegments:(NSString*)category;
 - (void) RemoveLastCoordinate;
 - (double) CalculateHaversineForPoint:(CLLocation *)p1 andPoint:(CLLocation *)p2;
 - (double) CalculateHaversineForCurrentCoordinate;

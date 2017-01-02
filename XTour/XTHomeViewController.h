@@ -45,8 +45,10 @@
 @property (retain, nonatomic) IBOutlet UILabel *timerLabel;
 @property (retain, nonatomic) IBOutlet UILabel *longLabel;
 @property (retain, nonatomic) IBOutlet UILabel *latLabel;
+@property (retain, nonatomic) IBOutlet UILabel *distanceTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (retain, nonatomic) IBOutlet UILabel *distanceRateLabel;
+@property (retain, nonatomic) IBOutlet UILabel *altitudeTitleLabel;
 @property (retain, nonatomic) IBOutlet UILabel *altitudeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *altitudeRateLabel;
 @property (retain, nonatomic) IBOutlet UILabel *elevationLabel;
@@ -61,6 +63,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *StopButton;
 @property (retain, nonatomic) IBOutlet UIButton *PauseButton;
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
+@property (retain, nonatomic) IBOutlet UIView *PauseButtonBackground;
 @property (retain, nonatomic) IBOutlet UIImageView *GPSSignal;
 @property (retain, nonatomic) NSTimer *pollingTimer;
 @property (retain, nonatomic) NSTimer *locationStartTimer;
@@ -69,6 +72,7 @@
 @property (nonatomic) double oldAccuracy;
 @property (nonatomic) NSInteger recoveryTimer;
 @property (nonatomic) bool didReachInitialAccuracy;
+@property (nonatomic) bool didSetInitialLocation;
 @property (nonatomic) bool didRecoverTour;
 @property (nonatomic) bool writeRecoveryFile;
 @property (retain, nonatomic) CLLocation *bestLocation;
@@ -76,7 +80,6 @@
 @property (retain, nonatomic) NSString *up_button_icon;
 @property (retain, nonatomic) NSString *down_button_icon;
 @property (retain, nonatomic) UIView *warningNotification;
-
 @property (retain, nonatomic) UIView *centerView;
 @property (retain, nonatomic) UIButton *centerButton;
 @property (retain, nonatomic) UIView *addWarningBackground;
@@ -112,6 +115,15 @@
 @property(nonatomic) BOOL didPickImage;
 @property(nonatomic) BOOL hasInitializedIcons;
 @property (retain, nonatomic) IBOutlet UIView *locationBackground;
+@property (nonatomic) BOOL startPointIsSet;
+@property (retain, nonatomic) UIView *imageCountBackground;
+@property (retain, nonatomic) UILabel *imageCount;
+@property (nonatomic) double ButtonWidthLarge;
+@property (nonatomic) double ButtonHeightLarge;
+@property (nonatomic) double StartButtonWidthSmall;
+@property (nonatomic) double StartButtonHeightSmall;
+@property (nonatomic) double PauseButtonWidthSmall;
+@property (nonatomic) double PauseButtonHeightSmall;
 
 - (IBAction)startUpTour:(id)sender;
 - (IBAction)startDownTour:(id)sender;
@@ -134,6 +146,7 @@
 - (void)RemoveFollowTour:(id)sender;
 - (void)centerMap:(id)sender;
 - (void)UpdateMap:(CLLocation*)location;
+- (void)RedrawTracks;
 - (void) LoadCamera:(id)sender;
 
 @end

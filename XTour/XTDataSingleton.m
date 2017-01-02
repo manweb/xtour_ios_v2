@@ -241,17 +241,19 @@
     }
 }
 
-- (void) AddCurrentPathToSegments
+- (void) AddCurrentPathToSegments:(NSString*)category
 {
+    NSInteger RunIndex = _lastRunIndex;
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         GMSMutablePath *path = [[GMSMutablePath alloc] init];
         GMSPolyline *polyline = [[GMSPolyline alloc] init];
         
-        if (_runStatus == 1 || _runStatus == 2) {polyline.strokeColor = [UIColor blueColor];}
-        else {polyline.strokeColor = [UIColor redColor];}
-        polyline.strokeWidth = 5.0f;
+        if ([category isEqualToString:@"up"]) {polyline.strokeColor = [UIColor colorWithRed:41.0f/255.0f green:127.0f/255.0f blue:199.0f/255.0f alpha:1.0f];}
+        else {polyline.strokeColor = [UIColor colorWithRed:199.0f/255.0f green:74.0F/255.0f blue:41.0f/255.0f alpha:1.0f];}
+        polyline.strokeWidth = 3.0f;
         
-        for (NSInteger i = _lastRunIndex; i < [_locationData count]; i++) {
+        for (NSInteger i = RunIndex; i < [_locationData count]; i++) {
             CLLocation *currentCoordinate = [_locationData objectAtIndex:i];
             
             [path addCoordinate:currentCoordinate.coordinate];
@@ -262,6 +264,8 @@
         [polyline setPath:[_pathSegmentsPath lastObject]];
         
         [_pathSegments addObject:polyline];
+        
+        _addedNewTrack = true;
     });
 }
 
@@ -487,7 +491,7 @@
     
     [xml SaveXML:FileName];
     
-    if (![category isEqualToString:@"sum"]) {[self AddCurrentPathToSegments];}
+    if (![category isEqualToString:@"sum"]) {[self AddCurrentPathToSegments:category];}
 }
 
 - (void) WriteRecoveryFile

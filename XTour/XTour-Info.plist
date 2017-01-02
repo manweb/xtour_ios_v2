@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour auch wenn das Gerät gesperrt ist</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Um Fotos zu machen braucht die App Zugang zu deiner Kamera</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Um Fotos hinzuzufügen braucht die App Zugang zu deiner Bibliothek</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -60,8 +68,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This application tracks your location</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

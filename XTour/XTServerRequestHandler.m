@@ -218,6 +218,8 @@
     
     NSArray *userStatistics_array = [response componentsSeparatedByString:@";"];
     
+    if ([userStatistics_array count] != 12) {return nil;}
+    
     for (int i = 0; i < [userStatistics_array count]; i++) {
         
         if ([userStatistics_array count] > 12) {return nil;}

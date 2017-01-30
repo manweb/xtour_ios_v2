@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour auch wenn das Gerät gesperrt ist</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Um Fotos zu machen braucht die App Zugang zu deiner Kamera</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Um Fotos hinzuzufügen braucht die App Zugang zu deiner Bibliothek</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -27,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7.1</string>
+	<string>2.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.7.1</string>
+	<string>2.1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -70,6 +60,20 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Um Fotos hinzuzufügen braucht die App Zugang zu deiner Bibliothek</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Diese App benötitgt keinen Zugang zu Bluetooth</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Um Fotos hinzuzufügen braucht die App Zugang zu deinen Fotos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Um Fotos zu machen braucht die App Zugang zu deiner Kamera</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour auch wenn das Gerät gesperrt ist</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Diese App benötigt deine Position für das Aufzeichnen deiner Tour</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

@@ -235,23 +235,25 @@
     _timerLabel.frame = CGRectMake(_width/2*0.2, _height*mapScreenFraction+5, _width*0.8, iconScale*40);
     _timerLabel.font = [UIFont fontWithName:@"Helvetica" size:40*iconScale];
     
-    _distanceTitleLabel.frame = CGRectMake(20, _height*mapScreenFraction+iconScale*50, _width/2-20, iconScale*20);
+    _distanceTitleLabel.frame = CGRectMake(15, _height*mapScreenFraction+iconScale*55, _width/2-15, iconScale*20);
     _distanceTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _distanceLabel.frame = CGRectMake(30, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _distanceLabel.frame = CGRectMake(20, _height*mapScreenFraction+iconScale*80, (_width/2-20)/2, iconScale*20);
     _distanceLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _distanceRateLabel.frame = CGRectMake(30+(_width/2-30)/2, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _distanceRateLabel.frame = CGRectMake(20+(_width/2-20)/2, _height*mapScreenFraction+iconScale*80, (_width/2-20)/2, iconScale*20);
     _distanceRateLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _altitudeTitleLabel.frame = CGRectMake(_width/2+20, _height*mapScreenFraction+iconScale*50, _width/2-20, iconScale*20);
+    _altitudeTitleLabel.frame = CGRectMake(_width/2+15, _height*mapScreenFraction+iconScale*55, _width/2-40, iconScale*20);
     _altitudeTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _altitudeLabel.frame = CGRectMake(_width/2+30, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _altitudeLabel.frame = CGRectMake(_width/2+20, _height*mapScreenFraction+iconScale*80, (_width/2-20)/2, iconScale*20);
     _altitudeLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _altitudeRateLabel.frame = CGRectMake(_width/2+30+(_width/2-30)/2, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _altitudeRateLabel.frame = CGRectMake(_width/2+20+(_width/2-20)/2, _height*mapScreenFraction+iconScale*80, (_width/2-20)/2, iconScale*20);
     _altitudeRateLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
+    
+    _altitudeRateIcon.frame = CGRectMake(_width-30, _height*mapScreenFraction+iconScale*53, iconScale*15, iconScale*15);
     
     _longLabel.frame = CGRectMake(30, 18, (_width-30)/3, 15);
     //_longLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
@@ -273,9 +275,9 @@
     
     _altitudeRateIcon.frame = CGRectMake(width-60, _sectionHeight/2-15*iconScale, 30*iconScale, 30*iconScale);*/
     
-    _HorizontalDevider.frame = CGRectMake(10, _height*mapScreenFraction+iconScale*40+5, _width-20, 1);
+    _HorizontalDevider.frame = CGRectMake(10, _height*mapScreenFraction+iconScale*40+10, _width-20, 1);
     
-    _VerticalDevider.frame = CGRectMake(_width/2, _height*mapScreenFraction+iconScale*40+7, 1, iconScale*50);
+    _VerticalDevider.frame = CGRectMake(_width/2, _height*mapScreenFraction+iconScale*40+12, 1, iconScale*45);
     
     double zoom = 10.0;
     if (data.runStatus != 0) {zoom = 15.0;}
@@ -920,9 +922,13 @@
     
     if (data.runModus == 0) {
         [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_icon v2.png",_up_button_icon]] forState:UIControlStateNormal];
+        
+        _polyline.strokeColor = [UIColor colorWithRed:41.0f/255.0f green:127.0f/255.0f blue:199.0f/255.0f alpha:1.0f];
     }
     else {
         [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_icon v2.png",_down_button_icon]] forState:UIControlStateNormal];
+        
+        _polyline.strokeColor = [UIColor colorWithRed:199.0f/255.0f green:74.0f/255.0f blue:41.0f/255.0f alpha:1.0f];
     }
     
     /*if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
@@ -1227,7 +1233,10 @@
         data.AltitudeRate = diffAltitude/data.rateTimer * 3600.0;
         
         NSString *r_dist_str = [NSString stringWithFormat:@"%.1f km/h", data.DistanceRate];
-        NSString *r_alt_str = [NSString stringWithFormat:@"%.1f m/h", data.AltitudeRate];
+        
+        NSString *r_alt_str;
+        if (data.AltitudeRate > 1000) {r_alt_str = [NSString stringWithFormat:@"%.1f km/h", data.AltitudeRate*1000];}
+        else {r_alt_str = [NSString stringWithFormat:@"%.0f m/h", data.AltitudeRate];}
         
         _distanceRateLabel.text = r_dist_str;
         _altitudeRateLabel.text = r_alt_str;

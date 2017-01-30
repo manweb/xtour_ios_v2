@@ -516,7 +516,7 @@
             _tourFiles = request.tourFilesType;
             _coordinateArray = request.tourFilesCoordinates;
             
-            NSString *requestString2 = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_tour_images_string.php?tid=%@", tourInfo.tourID];
+            NSString *requestString2 = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_start_stop_coordinates_string.php?tid=%@", tourInfo.tourID];
             NSURL *url2 = [NSURL URLWithString:requestString2];
             
             NSURLSession *session2 = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -524,9 +524,9 @@
             NSURLSessionTask *sessionTask2 = [session2 dataTaskWithRequest:[NSURLRequest requestWithURL:url2] completionHandler:^(NSData *responseData, NSURLResponse *URLResponse, NSError *error) {
                 XTServerRequestHandler *request2 = [[[XTServerRequestHandler alloc] init] autorelease];
                 
-                _tourImages = [request2 GetImagesForTour:(NSData*)responseData];
+                _startStopCoordinates = [request2 GetStartStopCoordinates:(NSData*)responseData];
                 
-                NSString *requestString3 = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_comments_string.php?tid=%@", tourInfo.tourID];
+                NSString *requestString3 = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_tour_images_string.php?tid=%@", tourInfo.tourID];
                 NSURL *url3 = [NSURL URLWithString:requestString3];
                 
                 NSURLSession *session3 = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -534,9 +534,23 @@
                 NSURLSessionTask *sessionTask3 = [session3 dataTaskWithRequest:[NSURLRequest requestWithURL:url3] completionHandler:^(NSData *responseData, NSURLResponse *URLResponse, NSError *error) {
                     XTServerRequestHandler *request3 = [[[XTServerRequestHandler alloc] init] autorelease];
                     
-                    _tourComments = [request3 GetUserCommentsForTour:(NSData*)responseData];
+                    _tourImages = [request3 GetImagesForTour:(NSData*)responseData];
                     
-                    [self UpdateView:tourInfo fromServer:server];
+                    NSString *requestString4 = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_comments_string.php?tid=%@", tourInfo.tourID];
+                    NSURL *url4 = [NSURL URLWithString:requestString4];
+                    
+                    NSURLSession *session4 = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+                    
+                    NSURLSessionTask *sessionTask4 = [session4 dataTaskWithRequest:[NSURLRequest requestWithURL:url4] completionHandler:^(NSData *responseData, NSURLResponse *URLResponse, NSError *error) {
+                        XTServerRequestHandler *request4 = [[[XTServerRequestHandler alloc] init] autorelease];
+                        
+                        _tourComments = [request4 GetUserCommentsForTour:(NSData*)responseData];
+                        
+                        [self UpdateView:tourInfo fromServer:server];
+                    }];
+                    
+                    [sessionTask4 resume];
+                
                 }];
                 
                 [sessionTask3 resume];
@@ -546,6 +560,7 @@
             [sessionTask2 resume];
             
             [request CheckGraphsForTour:tourInfo.tourID];
+        
         }];
         
         [sessionTask resume];
@@ -714,24 +729,40 @@
         currentPolyline.map = mapView;
     }
     
-    GMSMarker *startPoint = [[GMSMarker alloc] init];
+    NSMutableArray *startStopMarkerCoordinates;
     
-    startPoint.position = CLLocationCoordinate2DMake(tourInfo.latitude, tourInfo.longitude);
-    startPoint.icon = [UIImage imageNamed:@"markerIcon_green@3x.png"];
-    startPoint.groundAnchor = CGPointMake(0.5,0.5);
-    startPoint.map = mapView;
+    if (server) {startStopMarkerCoordinates = [[_startStopCoordinates mutableCopy] autorelease];}
+    else {startStopMarkerCoordinates = [[data.segmentCoordinates mutableCopy] autorelease];}
     
-    if ([_coordinateArray count] == 1) {
-        NSMutableArray *coordinate = [_coordinateArray objectAtIndex:0];
-        
-        CLLocation *location = [coordinate lastObject];
-        
+    for (int i = 0; i < [startStopMarkerCoordinates count]; i++) {
         GMSMarker *startPoint = [[GMSMarker alloc] init];
         
-        startPoint.position = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-        startPoint.icon = [UIImage imageNamed:@"markerIcon_red@3x.png"];
-        startPoint.groundAnchor = CGPointMake(0.5,0.5);
-        startPoint.map = mapView;
+        CLLocation *segmentLocation = [startStopMarkerCoordinates objectAtIndex:i];
+        
+        if (i==0) {
+            startPoint.position = CLLocationCoordinate2DMake(segmentLocation.coordinate.latitude, segmentLocation.coordinate.longitude);
+            startPoint.icon = [UIImage imageNamed:@"markerIcon_green@3x.png"];
+            startPoint.groundAnchor = CGPointMake(0.5,0.5);
+            startPoint.map = mapView;
+        }
+        else if (i==[startStopMarkerCoordinates count]-1) {
+            startPoint.position = CLLocationCoordinate2DMake(segmentLocation.coordinate.latitude, segmentLocation.coordinate.longitude);
+            startPoint.icon = [UIImage imageNamed:@"markerIcon_red@3x.png"];
+            startPoint.groundAnchor = CGPointMake(0.5,0.5);
+            startPoint.map = mapView;
+        }
+        else if (i%2==0 && !server) {
+            startPoint.position = CLLocationCoordinate2DMake(segmentLocation.coordinate.latitude, segmentLocation.coordinate.longitude);
+            startPoint.icon = [UIImage imageNamed:@"markerIcon_gray@3x.png"];
+            startPoint.groundAnchor = CGPointMake(0.5,0.5);
+            startPoint.map = mapView;
+        }
+        else if (server) {
+            startPoint.position = CLLocationCoordinate2DMake(segmentLocation.coordinate.latitude, segmentLocation.coordinate.longitude);
+            startPoint.icon = [UIImage imageNamed:@"markerIcon_gray@3x.png"];
+            startPoint.groundAnchor = CGPointMake(0.5,0.5);
+            startPoint.map = mapView;
+        }
     }
     
     GMSCameraUpdate *cameraUpdate = [GMSCameraUpdate fitBounds:[[GMSCoordinateBounds alloc]initWithCoordinate:CLLocationCoordinate2DMake(minLat, minLon) coordinate:CLLocationCoordinate2DMake(maxLat, maxLon)] withPadding:50.0f];

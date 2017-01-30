@@ -129,6 +129,11 @@
     double _sectionHeight = 60.0;
     double iconScale = 1.0;
     
+    double startButtonSize = 80.0;
+    double stopButtonSize = 50.0;
+    double changeButtonSize = 40.0;
+    double mapScreenFraction = 0.6;
+    
     // iPhone 4
     if (_height == 480) {
         dy = 3;
@@ -189,32 +194,18 @@
     
     yOffset += _sectionHeight + dy;*/
     
-    _PauseButtonBackground.frame = CGRectMake(_width-iconScale*85-20, _height-tabBarHeight-20-iconScale*85, iconScale*90, iconScale*90);
-    _PauseButtonBackground.layer.cornerRadius = 45*iconScale;
+    _StartButton.frame = CGRectMake((_width-iconScale*startButtonSize)/2, _height-tabBarHeight-iconScale*startButtonSize, iconScale*startButtonSize, iconScale*startButtonSize);
+    _FinishButton.frame = CGRectMake((_width+iconScale*startButtonSize)/2, _height-tabBarHeight-iconScale*(startButtonSize-(startButtonSize-stopButtonSize)/2), iconScale*stopButtonSize, iconScale*stopButtonSize);
+    _ModusButton.frame = CGRectMake((_width-iconScale*startButtonSize)/2-iconScale*(changeButtonSize+10)-iconScale*10, _height-tabBarHeight-iconScale*(startButtonSize-(startButtonSize-changeButtonSize)/2), iconScale*changeButtonSize, iconScale*changeButtonSize);
     
-    _StartButton.frame = CGRectMake(_width-iconScale*80-20, _height-tabBarHeight-20-iconScale*80, iconScale*80, iconScale*80);
-    _PauseButton.frame = CGRectMake(iconScale*5, iconScale*5, iconScale*80, iconScale*80);
-    _StopButton.frame = CGRectMake(_width-iconScale*80-20, _height-tabBarHeight-20-iconScale*80, iconScale*80, iconScale*80);
-    
-    UILongPressGestureRecognizer *longPressUp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(DidLongPressOnStartButton:)];
-    
-    UILongPressGestureRecognizer *longPressDown = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(DidLongPressOnStopButton:)];
-    
-    [_StartButton addGestureRecognizer:longPressUp];
-    [_StopButton addGestureRecognizer:longPressDown];
-    
-    [longPressUp release];
-    [longPressDown release];
-    
-    [_StopButton setHidden:YES];
-    [_PauseButtonBackground setHidden:YES];
+    [_FinishButton setHidden:YES];
     
     _ButtonWidthLarge = iconScale*80;
     _ButtonHeightLarge = iconScale*80;
     _StartButtonWidthSmall = iconScale*60;
     _StartButtonHeightSmall = iconScale*60;
     _PauseButtonWidthSmall = iconScale*40;
-    _PauseButtonHeightSmall = iconScale*40;
+    _PauseButtonWidthSmall = iconScale*40;
     
     /*_timerIcon.frame = CGRectMake(5, (_timerSectionHeight-iconScale*60)/2, iconScale*60, iconScale*60);
     _distanceIcon.frame = CGRectMake(10, (_sectionHeight-iconScale*40)/2, iconScale*40, iconScale*40);
@@ -241,26 +232,26 @@
     _altitudeSection.layer.borderColor = boxBorderColor.CGColor;
     _locationSection.layer.borderColor = boxBorderColor.CGColor;*/
     
-    _timerLabel.frame = CGRectMake(_width/2*0.2, _height*0.63+5, _width*0.8, iconScale*40);
+    _timerLabel.frame = CGRectMake(_width/2*0.2, _height*mapScreenFraction+5, _width*0.8, iconScale*40);
     _timerLabel.font = [UIFont fontWithName:@"Helvetica" size:40*iconScale];
     
-    _distanceTitleLabel.frame = CGRectMake(20, _height*0.63+iconScale*50, _width/2-20, iconScale*20);
+    _distanceTitleLabel.frame = CGRectMake(20, _height*mapScreenFraction+iconScale*50, _width/2-20, iconScale*20);
     _distanceTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _distanceLabel.frame = CGRectMake(30, _height*0.63+iconScale*70, (_width-40-iconScale*80)/2, iconScale*20);
-    _distanceLabel.font = [UIFont fontWithName:@"Helvetica" size:18*iconScale];
+    _distanceLabel.frame = CGRectMake(30, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _distanceLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _distanceRateLabel.frame = CGRectMake(30+(_width-40-iconScale*80)/2, _height*0.63+iconScale*70, (_width-40-iconScale*80)/2, iconScale*20);
-    _distanceRateLabel.font = [UIFont fontWithName:@"Helvetica" size:18*iconScale];
+    _distanceRateLabel.frame = CGRectMake(30+(_width/2-30)/2, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _distanceRateLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _altitudeTitleLabel.frame = CGRectMake(20, _height*0.63+iconScale*100, _width/2-20, iconScale*20);
+    _altitudeTitleLabel.frame = CGRectMake(_width/2+20, _height*mapScreenFraction+iconScale*50, _width/2-20, iconScale*20);
     _altitudeTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _altitudeLabel.frame = CGRectMake(30, _height*0.63+iconScale*120, (_width-40-iconScale*80)/2, iconScale*20);
-    _altitudeLabel.font = [UIFont fontWithName:@"Helvetica" size:18*iconScale];
+    _altitudeLabel.frame = CGRectMake(_width/2+30, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _altitudeLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
-    _altitudeRateLabel.frame = CGRectMake(30+(_width-40-iconScale*80)/2, _height*0.63+iconScale*120, (_width-40-iconScale*80)/2, iconScale*20);
-    _altitudeRateLabel.font = [UIFont fontWithName:@"Helvetica" size:18*iconScale];
+    _altitudeRateLabel.frame = CGRectMake(_width/2+30+(_width/2-30)/2, _height*mapScreenFraction+iconScale*70, (_width/2-30)/2, iconScale*20);
+    _altitudeRateLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
     
     _longLabel.frame = CGRectMake(30, 18, (_width-30)/3, 15);
     //_longLabel.font = [UIFont fontWithName:@"Helvetica" size:16*iconScale];
@@ -282,11 +273,15 @@
     
     _altitudeRateIcon.frame = CGRectMake(width-60, _sectionHeight/2-15*iconScale, 30*iconScale, 30*iconScale);*/
     
+    _HorizontalDevider.frame = CGRectMake(10, _height*mapScreenFraction+iconScale*40+5, _width-20, 1);
+    
+    _VerticalDevider.frame = CGRectMake(_width/2, _height*mapScreenFraction+iconScale*40+7, 1, iconScale*50);
+    
     double zoom = 10.0;
     if (data.runStatus != 0) {zoom = 15.0;}
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:46.770809 longitude:8.377733 zoom:zoom];
-    _mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, _width, _height*0.63) camera:camera];
+    _mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, _width, _height*mapScreenFraction) camera:camera];
     
     _mapView.mapType = kGMSTypeTerrain;
     
@@ -307,7 +302,7 @@
     
     _mapHasMoved = false;
     
-    _locationBackground.frame = CGRectMake(0, _height*0.63-35, _width, 35);
+    _locationBackground.frame = CGRectMake(0, _height*mapScreenFraction-35, _width, 35);
     
     _locationBackground.backgroundColor = [UIColor clearColor];
     
@@ -327,7 +322,7 @@
     centerBlurView.layer.cornerRadius = 5.0f;
     centerBlurView.clipsToBounds = YES;
     
-    _centerView = [[UIView alloc] initWithFrame:CGRectMake(_width/2-60, _height*0.63-60, 120, 30)];
+    _centerView = [[UIView alloc] initWithFrame:CGRectMake(_width/2-60, _height*mapScreenFraction-60, 120, 30)];
     
     _centerView.backgroundColor = [UIColor clearColor];
     _centerView.layer.cornerRadius = 5.0f;
@@ -690,14 +685,14 @@
     [_altitudeLabel release];
     [_altitudeRateLabel release];
     [_elevationLabel release];
-    [_PauseButton release];
+    [_FinishButton release];
     [_loginButton release];
     [_pollingTimer release];
     [login release];
     [summary release];
     [_GPSSignal release];
     [_StartButton release];
-    [_StopButton release];
+    [_ModusButton release];
     [_timerSection release];
     [_distanceSection release];
     [_altitudeSection release];
@@ -722,7 +717,8 @@
     [_locationBackground release];
     [_distanceTitleLabel release];
     [_altitudeTitleLabel release];
-    [_PauseButtonBackground release];
+    [_HorizontalDevider release];
+    [_VerticalDevider release];
     [super dealloc];
 }
 
@@ -771,11 +767,13 @@
             
     }
     
-    up_icon = [NSString stringWithFormat:@"%@_up_button v2.png",_up_button_icon];
-    down_icon = [NSString stringWithFormat:@"%@_down_button v2.png",_down_button_icon];
+    up_icon = [NSString stringWithFormat:@"%@_up_icon v2.png",_up_button_icon];
+    down_icon = [NSString stringWithFormat:@"%@_down_icon v2.png",_down_button_icon];
     
-    [_StartButton setImage:[UIImage imageNamed:up_icon] forState:UIControlStateNormal];
-    [_StopButton setImage:[UIImage imageNamed:down_icon] forState:UIControlStateNormal];
+    //[_StartButton setImage:[UIImage imageNamed:up_icon] forState:UIControlStateNormal];
+    
+    if (data.runModus == 0) {[_ModusButton setImage:[UIImage imageNamed:up_icon] forState:UIControlStateNormal];}
+    else {[_ModusButton setImage:[UIImage imageNamed:down_icon] forState:UIControlStateNormal];}
     
     _mapView.myLocationEnabled = YES;
     
@@ -871,97 +869,84 @@
     
 }
 
-- (IBAction)pauseTour:(id)sender {
-    [_pollingTimer invalidate];
-    _pollingTimer = nil;
-    
-    [self stopLocationUpdate:NO];
+- (IBAction)changeTourModus:(id)sender {
+    if (data.runModus == 0) {data.runModus = 1;}
+    else {data.runModus = 0;}
     
     if (_didRecoverTour) {
         _didRecoverTour = false;
         
         [_StartButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_button.png",_up_button_icon]] forState:UIControlStateNormal];
-        [_StopButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
-        [_PauseButton setImage:[UIImage imageNamed:@"stop_button.png"] forState:UIControlStateNormal];
+        [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
+        [_FinishButton setImage:[UIImage imageNamed:@"stop_button.png"] forState:UIControlStateNormal];
         
         data.runStatus = 2;
         
         return;
     }
     
-    if (data.runStatus == 1 || data.runStatus == 3) {
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            _PauseButtonBackground.frame = CGRectMake(_PauseButtonBackground.frame.origin.x*275.0f/230.0f, _PauseButtonBackground.frame.origin.y*475.0f/430.0f, _PauseButtonBackground.frame.size.width*0.6, _PauseButtonBackground.frame.size.height*0.6);
-            
-            _PauseButtonBackground.layer.cornerRadius *= 0.6;
-            
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x, _StartButton.frame.origin.y, _StartButton.frame.size.width*0.85, _StartButton.frame.size.height*0.85);
-            
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x, _StopButton.frame.origin.y, _StopButton.frame.size.width*0.85, _StopButton.frame.size.height*0.85);
-            
-            _PauseButton.frame = CGRectMake(_PauseButton.frame.origin.x*0.6, _PauseButton.frame.origin.y*0.6, _PauseButton.frame.size.width*0.6, _PauseButton.frame.size.height*0.6);
-        } completion:NULL];
-    }
-    
     if (data.runStatus == 0) {
-    
+        
     }
     else if (data.runStatus == 1) {
-        [_StartButton setHidden:NO];
-        [_PauseButton setImage:[UIImage imageNamed:@"stop_button v2.png"] forState:UIControlStateNormal];
-        data.runStatus = 2;
-    }
-    else if (data.runStatus == 2) {
         data.endTime = [NSDate date];
-        data.TotalEndTime = [NSDate date];
         [data CreateXMLForCategory:@"up"];
         
-        if (!summary) {summary = [[XTSummaryViewController alloc] initWithNibName:nil bundle:nil];}
-        [self presentViewController:summary animated:YES completion:nil];
+        data.downCount++;
+        [data ResetDataForNewRun];
+        data.startTime = [NSDate date];
         
-        [summary release];
-        summary = nil;
+        data.runStatus = 3;
+    }
+    else if (data.runStatus == 2) {
+        
     }
     else if (data.runStatus == 3) {
-        [_StopButton setHidden:NO];
-        [_PauseButton setImage:[UIImage imageNamed:@"stop_button v2.png"] forState:UIControlStateNormal];
-        data.runStatus = 4;
-    }
-    else if (data.runStatus == 4) {
         data.endTime = [NSDate date];
-        data.TotalEndTime = [NSDate date];
         [data CreateXMLForCategory:@"down"];
         
-        if (!summary) {summary = [[XTSummaryViewController alloc] initWithNibName:nil bundle:nil];}
-        [self presentViewController:summary animated:YES completion:nil];
+        data.upCount++;
+        [data ResetDataForNewRun];
+        data.startTime = [NSDate date];
         
-        [summary release];
-        summary = nil;
+        data.runStatus = 1;
+    }
+    else if (data.runStatus == 4) {
+        
     }
     
     //[_StartButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_button.png",_up_button_icon]] forState:UIControlStateNormal];
-    //[_StopButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
+    //[_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
     
-    if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
+    if (data.runModus == 0) {
+        [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_icon v2.png",_up_button_icon]] forState:UIControlStateNormal];
+    }
+    else {
+        [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_icon v2.png",_down_button_icon]] forState:UIControlStateNormal];
+    }
+    
+    /*if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
         [_totalTimeLabel setHidden:NO];
         [_totalDistanceLabel setHidden:NO];
         [_totalAltitudeLabel setHidden:NO];
-    }
+    }*/
 }
 
-- (IBAction)startUpTour:(id)sender {
-    if (_didReachInitialAccuracy && data.loggedIn) {
-        if (!_pollingTimer) {_pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollTime) userInfo:nil repeats:YES];}
+- (IBAction)startTour:(id)sender {
+    if (data.runStatus == 0 || data.runStatus == 2 || data.runStatus == 4) {
+        if (_didReachInitialAccuracy && data.loggedIn) {
+            if (!_pollingTimer) {_pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollTime) userInfo:nil repeats:YES];}
+        }
+        
+        [self startLocationUpdate];
     }
-    
-    [self startLocationUpdate];
     
     if (_didRecoverTour) {
         _didRecoverTour = false;
         
         [_StartButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_button_inactive.png",_up_button_icon]] forState:UIControlStateNormal];
-        [_StopButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
-        [_PauseButton setImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
+        [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
+        [_FinishButton setImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
         
         data.runStatus = 1;
         return;
@@ -985,7 +970,8 @@
             [alert show];
             [alert release];
             
-            data.runStatus = 1;
+            if (data.runModus == 0) {data.runStatus = 1;}
+            else {data.runStatus = 2;}
             
             return;
         }
@@ -998,235 +984,160 @@
         NSString *tourID = [[NSString alloc] initWithFormat:@"%@%@", [formatter stringFromDate:[NSDate date]], data.userID];
         
         data.tourID = tourID;
-        data.upCount++;
+        
+        if (data.runModus == 0) {data.upCount++; data.runStatus = 1;}
+        else {data.downCount++; data.runStatus = 3;}
         
         [_mapView animateToZoom:15.0];
         
-        [_StartButton setHidden:YES];
-        [_PauseButtonBackground setHidden:NO];
+        [_StartButton setImage:[UIImage imageNamed:@"pause_button v3.png"] forState:UIControlStateNormal];
+        
+        [_FinishButton setHidden:NO];
         
         [formatter release];
         [tourID release];
     }
     else if (data.runStatus == 1) {
-    
+        [_pollingTimer invalidate];
+        _pollingTimer = nil;
+        
+        [self stopLocationUpdate:NO];
+        
+        [_StartButton setImage:[UIImage imageNamed:@"start_button v3.png"] forState:UIControlStateNormal];
+        
+        data.runStatus = 2;
     }
     else if (data.runStatus == 2) {
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            [_PauseButtonBackground setAlpha:0.0];
+        if (data.runModus == 0) {data.runStatus = 1;}
+        else {
+            data.endTime = [NSDate date];
+            [data CreateXMLForCategory:@"up"];
             
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x, _StartButton.frame.origin.y, _StartButton.frame.size.width*1.0/0.85, _StartButton.frame.size.height*1.0/0.85);
+            data.downCount++;
+            [data ResetDataForNewRun];
+            data.startTime = [NSDate date];
             
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x, _StopButton.frame.origin.y, _StopButton.frame.size.width*1.0/0.85, _StopButton.frame.size.height*1.0/0.85);
-        } completion:^(BOOL finished) {
-            _PauseButtonBackground.frame = CGRectMake(_PauseButtonBackground.frame.origin.x*230.0f/275.0f, _PauseButtonBackground.frame.origin.y*430.0f/475.0f, _PauseButtonBackground.frame.size.width*1.0/0.6, _PauseButtonBackground.frame.size.height*1.0/0.6);
-            
-            _PauseButtonBackground.layer.cornerRadius *= 1.0/0.6;
-            
-            _PauseButton.frame = CGRectMake(_PauseButton.frame.origin.x*1.0/0.6, _PauseButton.frame.origin.y*1.0/0.6, _PauseButton.frame.size.width*1.0/0.6, _PauseButton.frame.size.height*1.0/0.6);
-            
-            [_PauseButton setImage:[UIImage imageNamed:@"pause_button v2.png"] forState:UIControlStateNormal];
-            
-            [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-                [_StartButton setAlpha:0.0];
-                [_PauseButtonBackground setAlpha:1.0];
-            } completion:^(BOOL finished) {
-                [_StartButton setHidden:YES];
-                [_StartButton setAlpha:1.0];
-            }];
-        }];
+            data.runStatus = 3;
+        }
+        
+        [_StartButton setImage:[UIImage imageNamed:@"pause_button v3.png"] forState:UIControlStateNormal];
     }
     else if (data.runStatus == 3) {
-        data.endTime = [NSDate date];
-        [data CreateXMLForCategory:@"down"];
+        [_pollingTimer invalidate];
+        _pollingTimer = nil;
         
-        data.upCount++;
-        [data ResetDataForNewRun];
-        data.startTime = [NSDate date];
+        [self stopLocationUpdate:NO];
+        
+        [_StartButton setImage:[UIImage imageNamed:@"start_button v3.png"] forState:UIControlStateNormal];
+        
+        data.runStatus = 4;
     }
     else if (data.runStatus == 4) {
-        data.endTime = [NSDate date];
-        [data CreateXMLForCategory:@"down"];
+        if (data.runModus == 1) {data.runStatus = 3;}
+        else {
+            data.endTime = [NSDate date];
+            [data CreateXMLForCategory:@"down"];
+            
+            data.upCount++;
+            [data ResetDataForNewRun];
+            data.startTime = [NSDate date];
+            
+            data.runStatus = 1;
+        }
         
-        data.upCount++;
-        [data ResetDataForNewRun];
-        data.startTime = [NSDate date];
-        
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            [_PauseButtonBackground setAlpha:0.0];
-            
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x, _StartButton.frame.origin.y, _StartButton.frame.size.width*1.0/0.85, _StartButton.frame.size.height*1.0/0.85);
-            
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x, _StopButton.frame.origin.y, _StopButton.frame.size.width*1.0/0.85, _StopButton.frame.size.height*1.0/0.85);
-        } completion:^(BOOL finished) {
-            _PauseButtonBackground.frame = CGRectMake(_PauseButtonBackground.frame.origin.x*230.0f/275.0f, _PauseButtonBackground.frame.origin.y*430.0f/475.0f, _PauseButtonBackground.frame.size.width*1.0/0.6, _PauseButtonBackground.frame.size.height*1.0/0.6);
-            
-            _PauseButtonBackground.layer.cornerRadius *= 1.0/0.6;
-            
-            _PauseButton.frame = CGRectMake(_PauseButton.frame.origin.x*1.0/0.6, _PauseButton.frame.origin.y*1.0/0.6, _PauseButton.frame.size.width*1.0/0.6, _PauseButton.frame.size.height*1.0/0.6);
-            
-            [_PauseButton setImage:[UIImage imageNamed:@"pause_button v2.png"] forState:UIControlStateNormal];
-            
-            [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-                [_StartButton setAlpha:0.0];
-                [_PauseButtonBackground setAlpha:1.0];
-            } completion:^(BOOL finished) {
-                [_StartButton setHidden:YES];
-                [_StartButton setAlpha:1.0];
-            }];
-        }];
+        [_StartButton setImage:[UIImage imageNamed:@"pause_button v3.png"] forState:UIControlStateNormal];
     }
     
     //[_StartButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_button_inactive.png",_up_button_icon]] forState:UIControlStateNormal];
-    //[_StopButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
+    //[_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
     
-    data.runStatus = 1;
-    
-    if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
+    /*if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
         [_totalTimeLabel setHidden:NO];
         [_totalDistanceLabel setHidden:NO];
         [_totalAltitudeLabel setHidden:NO];
-    }
+    }*/
 }
 
-- (IBAction)startDownTour:(id)sender {
-    if (_didReachInitialAccuracy && data.loggedIn) {
-        if (!_pollingTimer) {_pollingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollTime) userInfo:nil repeats:YES];}
-    }
-    
-    [self startLocationUpdate];
-    
+- (IBAction)finishTour:(id)sender {
     if (_didRecoverTour) {
         _didRecoverTour = false;
         
         [_StartButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_button.png",_up_button_icon]] forState:UIControlStateNormal];
-        [_StopButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button_inactive.png",_down_button_icon]] forState:UIControlStateNormal];
-        [_PauseButton setImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
+        [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button_inactive.png",_down_button_icon]] forState:UIControlStateNormal];
+        [_FinishButton setImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
         
         data.runStatus = 3;
         return;
     }
     
     if (data.runStatus == 0) {
-        if (!data.loggedIn) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login" message:@"Du musst dich einloggen um eine Tour zu starten. Klicke auf das Profil-Icon." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            
-            [alert show];
-            [alert release];
-            
-            return;
-        }
-        
-        if (!_didReachInitialAccuracy) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Achtung" message:@"Das GPS Signal ist noch etwas schwach. Möchtest du die Tour trotzdem starten?" delegate:self cancelButtonTitle:@"Nein" otherButtonTitles:@"Ja", nil];
-            
-            alert.tag = 1;
-            
-            [alert show];
-            [alert release];
-            
-            data.runStatus = 3;
-            
-            return;
-        }
-        data.startTime = [NSDate date];
-        data.TotalStartTime = [NSDate date];
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyyLLddHHmmss"];
-        
-        NSString *tourID = [[NSString alloc] initWithFormat:@"%@%@", [formatter stringFromDate:[NSDate date]], data.userID];
-        
-        data.tourID = tourID;
-        data.downCount++;
-        
-        [_mapView animateToZoom:15.0];
-        
-        [_StopButton setHidden:YES];
-        [_PauseButtonBackground setHidden:NO];
-        
-        [formatter release];
-        [tourID release];
+
     }
     else if (data.runStatus == 1) {
+        [_pollingTimer invalidate];
+        _pollingTimer = nil;
+        
+        [self stopLocationUpdate:NO];
+        
         data.endTime = [NSDate date];
+        data.TotalEndTime = [NSDate date];
         [data CreateXMLForCategory:@"up"];
         
-        data.downCount++;
-        [data ResetDataForNewRun];
-        data.startTime = [NSDate date];
+        if (!summary) {summary = [[XTSummaryViewController alloc] initWithNibName:nil bundle:nil];}
+        [self presentViewController:summary animated:YES completion:nil];
+        
+        [summary release];
+        summary = nil;
     }
     else if (data.runStatus == 2) {
         data.endTime = [NSDate date];
+        data.TotalEndTime = [NSDate date];
         [data CreateXMLForCategory:@"up"];
         
-        data.downCount++;
-        [data ResetDataForNewRun];
-        data.startTime = [NSDate date];
+        if (!summary) {summary = [[XTSummaryViewController alloc] initWithNibName:nil bundle:nil];}
+        [self presentViewController:summary animated:YES completion:nil];
         
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            [_PauseButtonBackground setAlpha:0.0];
-            
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x, _StartButton.frame.origin.y, _StartButton.frame.size.width*1.0/0.85, _StartButton.frame.size.height*1.0/0.85);
-            
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x, _StopButton.frame.origin.y, _StopButton.frame.size.width*1.0/0.85, _StopButton.frame.size.height*1.0/0.85);
-        } completion:^(BOOL finished) {
-            _PauseButtonBackground.frame = CGRectMake(_PauseButtonBackground.frame.origin.x*230.0f/275.0f, _PauseButtonBackground.frame.origin.y*430.0f/475.0f, _PauseButtonBackground.frame.size.width*1.0/0.6, _PauseButtonBackground.frame.size.height*1.0/0.6);
-            
-            _PauseButtonBackground.layer.cornerRadius *= 1.0/0.6;
-            
-            _PauseButton.frame = CGRectMake(_PauseButton.frame.origin.x*1.0/0.6, _PauseButton.frame.origin.y*1.0/0.6, _PauseButton.frame.size.width*1.0/0.6, _PauseButton.frame.size.height*1.0/0.6);
-            
-            [_PauseButton setImage:[UIImage imageNamed:@"pause_button v2.png"] forState:UIControlStateNormal];
-            
-            [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-                [_StopButton setAlpha:0.0];
-                [_PauseButtonBackground setAlpha:1.0];
-            } completion:^(BOOL finished) {
-                [_StopButton setHidden:YES];
-                [_StopButton setAlpha:1.0];
-            }];
-        }];
+        [summary release];
+        summary = nil;
     }
     else if (data.runStatus == 3) {
-    
+        [_pollingTimer invalidate];
+        _pollingTimer = nil;
+        
+        [self stopLocationUpdate:NO];
+        
+        data.endTime = [NSDate date];
+        data.TotalEndTime = [NSDate date];
+        [data CreateXMLForCategory:@"down"];
+        
+        if (!summary) {summary = [[XTSummaryViewController alloc] initWithNibName:nil bundle:nil];}
+        [self presentViewController:summary animated:YES completion:nil];
+        
+        [summary release];
+        summary = nil;
     }
     else if (data.runStatus == 4) {
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            [_PauseButtonBackground setAlpha:0.0];
-            
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x, _StartButton.frame.origin.y, _StartButton.frame.size.width*1.0/0.85, _StartButton.frame.size.height*1.0/0.85);
-            
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x, _StopButton.frame.origin.y, _StopButton.frame.size.width*1.0/0.85, _StopButton.frame.size.height*1.0/0.85);
-        } completion:^(BOOL finished) {
-            _PauseButtonBackground.frame = CGRectMake(_PauseButtonBackground.frame.origin.x*230.0f/275.0f, _PauseButtonBackground.frame.origin.y*430.0f/475.0f, _PauseButtonBackground.frame.size.width*1.0/0.6, _PauseButtonBackground.frame.size.height*1.0/0.6);
-            
-            _PauseButtonBackground.layer.cornerRadius *= 1.0/0.6;
-            
-            _PauseButton.frame = CGRectMake(_PauseButton.frame.origin.x*1.0/0.6, _PauseButton.frame.origin.y*1.0/0.6, _PauseButton.frame.size.width*1.0/0.6, _PauseButton.frame.size.height*1.0/0.6);
-            
-            [_PauseButton setImage:[UIImage imageNamed:@"pause_button v2.png"] forState:UIControlStateNormal];
-            
-            [UIView animateWithDuration:0.4f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-                [_StopButton setAlpha:0.0];
-                [_PauseButtonBackground setAlpha:1.0];
-            } completion:^(BOOL finished) {
-                [_StopButton setHidden:YES];
-                [_StopButton setAlpha:1.0];
-            }];
-        }];
+        data.endTime = [NSDate date];
+        data.TotalEndTime = [NSDate date];
+        [data CreateXMLForCategory:@"down"];
+        
+        if (!summary) {summary = [[XTSummaryViewController alloc] initWithNibName:nil bundle:nil];}
+        [self presentViewController:summary animated:YES completion:nil];
+        
+        [summary release];
+        summary = nil;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ResetTour) name:@"SummaryViewDismissed" object:nil];
+    
     //[_StartButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_button.png",_up_button_icon]] forState:UIControlStateNormal];
-    //[_StopButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button_inactive.png",_down_button_icon]] forState:UIControlStateNormal];
+    //[_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button_inactive.png",_down_button_icon]] forState:UIControlStateNormal];
     
-    data.runStatus = 3;
-    
-    if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
+    /*if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
         [_totalTimeLabel setHidden:NO];
         [_totalDistanceLabel setHidden:NO];
         [_totalAltitudeLabel setHidden:NO];
-    }
+    }*/
 }
 
 - (void) FinishTour:(bool)batteryIsLow
@@ -1409,8 +1320,6 @@
     _distanceRateLabel.text = @"-- km/h";
     _altitudeRateLabel.text = @"-- m/h";
     
-    [_PauseButton setImage:[UIImage imageNamed:@"pause_button v2.png"] forState:UIControlStateNormal];
-    
     [_totalTimeLabel setHidden:YES];
     [_totalDistanceLabel setHidden:YES];
     [_totalAltitudeLabel setHidden:YES];
@@ -1421,33 +1330,15 @@
     
     [_imageCountBackground setHidden:YES];
     
-    for (int i = 0; i < [_polylines count]; i++) {
-        GMSPolyline *currentPolyline = [_polylines objectAtIndex:i];
-        
-        currentPolyline.map = nil;
-    }
-    
-    [_polylines removeAllObjects];
-    
     [_mapView clear];
     
     [_followTourView setHidden:YES];
     
     data.followTourInfo = nil;
     
-    _StartButton.frame = CGRectMake(_StartButton.frame.origin.x, _StartButton.frame.origin.y, _StartButton.frame.size.width*1.0/0.85, _StartButton.frame.size.height*1.0/0.85);
+    [self RedrawTracks];
     
-    _StopButton.frame = CGRectMake(_StopButton.frame.origin.x, _StopButton.frame.origin.y, _StopButton.frame.size.width*1.0/0.85, _StopButton.frame.size.height*1.0/0.85);
-    
-    _PauseButtonBackground.frame = CGRectMake(_PauseButtonBackground.frame.origin.x*230.0f/275.0f, _PauseButtonBackground.frame.origin.y*430.0f/475.0f, _PauseButtonBackground.frame.size.width*1.0/0.6, _PauseButtonBackground.frame.size.height*1.0/0.6);
-    
-    _PauseButtonBackground.layer.cornerRadius *= 1.0/0.6;
-    
-    _PauseButton.frame = CGRectMake(_PauseButton.frame.origin.x*1.0/0.6, _PauseButton.frame.origin.y*1.0/0.6, _PauseButton.frame.size.width*1.0/0.6, _PauseButton.frame.size.height*1.0/0.6);
-    
-    [_StartButton setHidden:NO];
-    [_StopButton setHidden:YES];
-    [_PauseButtonBackground setHidden:YES];
+    [_FinishButton setHidden:YES];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1476,13 +1367,14 @@
             else {
                 data.downCount++;
                 
-                //[_StopButton setImage:[UIImage imageNamed:@"skier_down_button_inactive.png"] forState:UIControlStateNormal];
+                //[_ModusButton setImage:[UIImage imageNamed:@"skier_down_button_inactive.png"] forState:UIControlStateNormal];
             }
             
-            [_StartButton setHidden:YES];
-            [_PauseButtonBackground setHidden:NO];
-            
             [_mapView animateToZoom:15.0];
+            
+            [_StartButton setImage:[UIImage imageNamed:@"pause_button v3.png"] forState:UIControlStateNormal];
+            
+            [_FinishButton setHidden:NO];
             
             [formatter release];
             [tourID release];
@@ -1511,7 +1403,7 @@
                 data.runStatus = 3;
                 
                 [_StartButton setHidden:YES];
-                [_StopButton setHidden:NO];
+                [_ModusButton setHidden:NO];
             }
             else if (data.runStatus == 3) {
                 data.endTime = [NSDate date];
@@ -1524,7 +1416,7 @@
                 data.runStatus = 1;
                 
                 [_StartButton setHidden:NO];
-                [_StopButton setHidden:YES];
+                [_ModusButton setHidden:YES];
             }
         }
     }
@@ -1593,52 +1485,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginViewDismissed" object:nil userInfo:nil];
 }
 
-- (void)DidLongPressOnStartButton:(UIGestureRecognizer*)gesture
-{
-    double scale = 1.2;
-    double offset = 50;
-    
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x - _StartButton.frame.size.width*(scale-1)/2, _StartButton.frame.origin.y - _StartButton.frame.size.height*(scale-1)/2 - offset, _StartButton.frame.size.width*scale, _StartButton.frame.size.height*scale);
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x - _StopButton.frame.size.width*(scale-1)/2, _StopButton.frame.origin.y - _StopButton.frame.size.height*(scale-1)/2 - offset, _StopButton.frame.size.width*scale, _StopButton.frame.size.height*scale);
-        } completion:^(BOOL finished) {
-            [_StartButton setHidden:YES];
-            [_StopButton setHidden:NO];
-        }];
-    }
-    
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x + _StartButton.frame.size.width*(1-1/scale)/2, _StartButton.frame.origin.y + _StartButton.frame.size.height*(1-1/scale)/2 + offset, _StartButton.frame.size.width*1/scale, _StartButton.frame.size.height*1/scale);
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x + _StopButton.frame.size.width*(1-1/scale)/2, _StopButton.frame.origin.y + _StopButton.frame.size.height*(1-1/scale)/2 + offset, _StopButton.frame.size.width*1/scale, _StopButton.frame.size.height*1/scale);
-        } completion:NULL];
-    }
-}
-
-- (void)DidLongPressOnStopButton:(UIGestureRecognizer*)gesture
-{
-    double scale = 1.2;
-    double offset = 50;
-    
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x - _StartButton.frame.size.width*(scale-1)/2, _StartButton.frame.origin.y - _StartButton.frame.size.height*(scale-1)/2 - offset, _StartButton.frame.size.width*scale, _StartButton.frame.size.height*scale);
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x - _StopButton.frame.size.width*(scale-1)/2, _StopButton.frame.origin.y - _StopButton.frame.size.height*(scale-1)/2 - offset, _StopButton.frame.size.width*scale, _StopButton.frame.size.height*scale);
-        } completion:^(BOOL finished) {
-            [_StartButton setHidden:NO];
-            [_StopButton setHidden:YES];
-        }];
-    }
-    
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^(void) {
-            _StartButton.frame = CGRectMake(_StartButton.frame.origin.x + _StartButton.frame.size.width*(1-1/scale)/2, _StartButton.frame.origin.y + _StartButton.frame.size.height*(1-1/scale)/2 + offset, _StartButton.frame.size.width*1/scale, _StartButton.frame.size.height*1/scale);
-            _StopButton.frame = CGRectMake(_StopButton.frame.origin.x + _StopButton.frame.size.width*(1-1/scale)/2, _StopButton.frame.origin.y + _StopButton.frame.size.height*(1-1/scale)/2 + offset, _StopButton.frame.size.width*1/scale, _StopButton.frame.size.height*1/scale);
-        } completion:NULL];
-    }
-}
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation* Location = [locations lastObject];
     
@@ -1697,6 +1543,38 @@
                     [[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%lu", (unsigned long)[warningsArray count]]];
                     
                     [self ShowWarningNotification];
+                    
+                    for (int i = 0; i < [warningsArray count]; i++) {
+                        GMSMarker *warningMarker = [[GMSMarker alloc] init];
+                        
+                        XTWarningsInfo *currentInfo = [warningsArray objectAtIndex:i];
+                        
+                        NSString *warningTitle;
+                        switch (currentInfo.category) {
+                            case 0:
+                                warningTitle = @"Lawinenabgang";
+                                break;
+                            case 1:
+                                warningTitle = @"Instabile Unterlage";
+                                break;
+                            case 2:
+                                warningTitle = @"Spalten";
+                                break;
+                            case 3:
+                                warningTitle = @"@Steinschlag";
+                                break;
+                            case 4:
+                                warningTitle = @"Gefahrenstelle";
+                                break;
+                        }
+                        
+                        warningMarker.position = CLLocationCoordinate2DMake(currentInfo.latitude, currentInfo.longitude);
+                        warningMarker.icon = [UIImage imageNamed:@"ski_pole_warning@3x.png"];
+                        warningMarker.groundAnchor = CGPointMake(0.88, 1.0);
+                        warningMarker.appearAnimation = kGMSMarkerAnimationPop;
+                        warningMarker.title = warningTitle;
+                        warningMarker.map = _mapView;
+                    }
                 }
                 else {[[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:nil];}
             }];
@@ -1914,6 +1792,8 @@
 - (void)centerMap:(id)sender {
     _mapHasMoved = false;
     [_centerView setHidden:YES];
+    
+    [_mapView animateToLocation:CLLocationCoordinate2DMake(data.CurrentLocation.coordinate.latitude, data.CurrentLocation.coordinate.longitude)];
 }
 
 - (void)AddWarning:(id)sender {
@@ -2128,7 +2008,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+/*- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (UIEventSubtypeMotionShake) {
         NSString *messageTitle;
         NSString *message;
@@ -2152,6 +2032,6 @@
             [alert release];
         }
     }
-}
+}*/
 
 @end

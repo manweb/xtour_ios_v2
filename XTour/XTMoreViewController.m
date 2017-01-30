@@ -35,10 +35,8 @@
     _header.backgroundColor = [UIColor colorWithRed:41.f/255.f green:127.f/255.f blue:199.f/255.f alpha:0.9f];
     _header_shadow.backgroundColor = [UIColor colorWithRed:24.f/255.f green:71.f/255.f blue:111.f/255.f alpha:0.9f];
     
-    _header.frame = CGRectMake(0, 0, width, 69);
-    _header_shadow.frame = CGRectMake(0, 69, width, 1);
-    
-    _loginButton.frame = CGRectMake(width-50, 25, 40, 40);
+    _header.frame = CGRectMake(0, 0, width, 20);
+    _header_shadow.frame = CGRectMake(0, 20, width, 1);
     
     [_tableView setContentInset:UIEdgeInsetsMake(100, 0, 0, 0)];
     
@@ -89,8 +87,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self LoginViewDidClose:nil];
     
     if (navigationView.view.frame.origin.x == 0) {
         [navigationView.backButton setHidden:NO];
@@ -325,71 +321,10 @@
 }
 
 - (void)dealloc {
-    [_loginButton release];
     [_header release];
     [_header_shadow release];
     [_tableView release];
     [super dealloc];
-}
-- (void)LoadLogin:(id)sender {
-    if (login) {[login.view removeFromSuperview];}
-    
-    login = [[XTLoginViewController alloc] initWithNibName:nil bundle:nil];
-    
-    [[[UIApplication sharedApplication] keyWindow] addSubview:login.view];
-    [login animate];
-}
-
-- (void)ShowLoginOptions:(id)sender {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginViewDidClose:) name:@"LoginViewDismissed" object:nil];
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"Du bist eingelogged als %@",data.userInfo.userName] delegate:self cancelButtonTitle:@"Abbrechen" destructiveButtonTitle:@"Ausloggen" otherButtonTitles:@"Profil anzeigen", nil];
-    
-    [actionSheet showInView:self.view];
-}
-
-- (void) LoginViewDidClose:(id)sender
-{
-    [_loginButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    
-    if (data.loggedIn) {
-        NSString *tempPath = [data GetDocumentFilePathForFile:@"/profile.png" CheckIfExist:NO];
-        UIImage *img = [[UIImage alloc] initWithContentsOfFile:tempPath];
-        [_loginButton setImage:img forState:UIControlStateNormal];
-        [_loginButton addTarget:self action:@selector(ShowLoginOptions:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [img release];
-    }
-    else {
-        [_loginButton setImage:[UIImage imageNamed:@"profile_icon.png"] forState:UIControlStateNormal];
-        [_loginButton addTarget:self action:@selector(LoadLogin:) forControlEvents:UIControlEventTouchUpInside];
-    }
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    
-    if ([buttonTitle isEqualToString:@"Ausloggen"]) {[data Logout];}
-    else if ([buttonTitle isEqualToString:@"Profil anzeigen"]) {
-        CGRect screenBound = [[UIScreen mainScreen] bounds];
-        float width = screenBound.size.width;
-        float height = screenBound.size.height;
-        
-        XTProfileViewController *profile = [[XTProfileViewController alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-        
-        [profile initialize];
-        
-        navigationView = [[XTNavigationViewContainer alloc] initWithNibName:nil bundle:nil view:profile title:data.userInfo.userName isFirstView:YES];
-        
-        [self.view addSubview:navigationView.view];
-        
-        [navigationView ShowView];
-        
-        [profile release];
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginViewDismissed" object:nil userInfo:nil];
 }
 
 @end

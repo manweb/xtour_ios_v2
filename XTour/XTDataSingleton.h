@@ -71,12 +71,14 @@
 @property(nonatomic,retain) XTUserInfo *userInfo;
 @property(nonatomic,retain) NSMutableArray *warningInfo;
 @property(nonatomic) NSInteger runStatus;
+@property(nonatomic) NSInteger runModus;
 @property(nonatomic,retain) XTSettings *profileSettings;
 @property(nonatomic) bool lowBatteryLevel;
 @property(nonatomic,retain) XTTourInfo *followTourInfo;
 @property(nonatomic,retain) NSMutableArray *pathSegments;
 @property(nonatomic,retain) NSMutableArray *pathSegmentsPath;
 @property(nonatomic) bool addedNewTrack;
+@property(nonatomic,retain) NSMutableArray *segmentCoordinates;
 
 + (XTDataSingleton *) singleObj;
 

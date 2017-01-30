@@ -63,6 +63,7 @@
 @property (nonatomic) CGRect frameOrigin;
 @property (nonatomic) bool mapWasShown;
 @property (nonatomic,retain) NSURLSessionTask *previewSessionTask;
+@property (nonatomic,retain) NSURLSessionTask *previewSessionTask2;
 @property (nonatomic,retain) UIView *noConnectionView;
 
 - (void) refreshNewsFeed;

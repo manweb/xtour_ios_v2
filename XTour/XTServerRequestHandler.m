@@ -98,6 +98,33 @@
     }
 }
 
+- (NSMutableArray *) GetStartStopCoordinates:(NSData*)responseData
+{
+    NSMutableArray *start_stop_coordinates = [[NSMutableArray alloc] init];
+    
+    NSString *response = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    
+    if ([response isEqualToString:@""]) {return nil;}
+    
+    NSArray *start_stop_coordinates_array = [response componentsSeparatedByString:@";"];
+    NSMutableArray *start_stop_coordinates_array2 = [NSMutableArray arrayWithArray:start_stop_coordinates_array];
+    [start_stop_coordinates_array2 removeLastObject];
+    
+    for (int i = 0; i < [start_stop_coordinates_array2 count]; i++) {
+        NSString *currentCoordinates = [start_stop_coordinates_array2 objectAtIndex:i];
+        
+        NSArray *startStopCoordinates = [currentCoordinates componentsSeparatedByString:@","];
+        
+        if ([startStopCoordinates count] < 3) {continue;}
+        
+        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:[[startStopCoordinates objectAtIndex:0] doubleValue] longitude:[[startStopCoordinates objectAtIndex:1] doubleValue]];
+        
+        [start_stop_coordinates addObject:currentLocation];
+    }
+    
+    return start_stop_coordinates;
+}
+
 - (NSMutableArray *) GetImagesForTour:(NSData*)responseData
 {
     NSMutableArray *tour_images = [[NSMutableArray alloc] init];

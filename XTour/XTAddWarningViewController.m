@@ -121,7 +121,7 @@
     [_warning2 setBackgroundImage:[UIImage imageNamed:@"warning_icon_unstable@3x.png"] forState:UIControlStateNormal];
     [_warning3 setBackgroundImage:[UIImage imageNamed:@"warning_icon_crack@3x.png"] forState:UIControlStateNormal];
     [_warning4 setBackgroundImage:[UIImage imageNamed:@"warning_icon_falling_rocks@3x.png"] forState:UIControlStateNormal];
-    [_warning5 setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [_warning5 setBackgroundImage:[UIImage imageNamed:@"warning_icon_other@3x.png"] forState:UIControlStateNormal];
     
     _warning1.tag = 1;
     _warning2.tag = 2;

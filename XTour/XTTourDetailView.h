@@ -26,6 +26,7 @@
 }
 
 @property (retain, nonatomic) NSMutableArray *coordinateArray;
+@property (retain, nonatomic) NSMutableArray *startStopCoordinates;
 @property (retain, nonatomic) NSMutableArray *tourImages;
 @property (retain, nonatomic) NSMutableArray *tourFiles;
 @property (retain, nonatomic) NSMutableArray *tourComments;

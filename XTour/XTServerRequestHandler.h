@@ -25,6 +25,7 @@
 
 - (NSMutableArray *) GetNewsFeedString:(NSData*)responseData;
 - (void) ProcessTourCoordinates:(NSData*)responseData;
+- (NSMutableArray *) GetStartStopCoordinates:(NSData*)responseData;
 - (NSMutableArray *) GetImagesForTour:(NSData*)responseData;
 - (NSMutableArray *) GetUserCommentsForTour:(NSData*)responseData;
 - (NSMutableArray *) GetWarningsWithinRadius:(NSData*)responseData;

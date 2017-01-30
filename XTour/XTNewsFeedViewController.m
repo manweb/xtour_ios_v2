@@ -859,10 +859,10 @@ static NSString * const reuseIdentifier = @"Cell";
         float distance = _tapPoint.y - p.y;
         
         float rangeLowMapView = 0;
-        float rangeUpMapView = (_frameOrigin.origin.y - 40)/2;
+        float rangeUpMapView = (_frameOrigin.origin.y - 30)/2;
         
         float rangeLowGraphView = rangeUpMapView;
-        float rangeUpGraphView = _frameOrigin.origin.y - 40;
+        float rangeUpGraphView = _frameOrigin.origin.y - 30;
         
         float previewMapViewAlpha = 1.0/(rangeUpMapView-rangeLowMapView)*distance + 1.0 - 1.0/(rangeUpMapView-rangeLowMapView)*rangeUpMapView;
         if (previewMapViewAlpha > 1) {previewMapViewAlpha = 1;}
@@ -876,8 +876,8 @@ static NSString * const reuseIdentifier = @"Cell";
         
         float previewSummaryY = _frameOrigin.origin.y - distance;
         
-        if (previewSummaryY < 40) {
-            float overshoot = 40 - previewSummaryY;
+        if (previewSummaryY < 30) {
+            float overshoot = 30 - previewSummaryY;
             
             previewSummaryY += overshoot;
             previewSummaryY -= overshoot/8;
@@ -885,7 +885,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
         float previewUpArrowAlpha = 1.0;
         
-        if (previewSummaryY < 50) {previewUpArrowAlpha = 1.0/10.0*previewSummaryY + 1.0 - 1.0/10.0*50;}
+        if (previewSummaryY < 40) {previewUpArrowAlpha = 1.0/10.0*previewSummaryY + 1.0 - 1.0/10.0*40;}
         
         _previewSummary.frame = CGRectMake(_frameOrigin.origin.x, previewSummaryY, _frameOrigin.size.width, _frameOrigin.size.height);
         
@@ -1045,28 +1045,46 @@ static NSString * const reuseIdentifier = @"Cell";
             currentPolyline.map = _map;
         }
         
-        GMSMarker *startPoint = [[GMSMarker alloc] init];
-        
-        startPoint.position = CLLocationCoordinate2DMake(tourInfo.latitude, tourInfo.longitude);
-        startPoint.icon = [UIImage imageNamed:@"markerIcon_green@3x.png"];
-        startPoint.groundAnchor = CGPointMake(0.5,0.5);
-        startPoint.map = _map;
-        
-        if ([coordinateArray count] == 1) {
-            NSMutableArray *coordinate = [coordinateArray objectAtIndex:0];
-            
-            CLLocation *location = [coordinate lastObject];
-            
-            GMSMarker *startPoint = [[GMSMarker alloc] init];
-            
-            startPoint.position = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-            startPoint.icon = [UIImage imageNamed:@"markerIcon_red@3x.png"];
-            startPoint.groundAnchor = CGPointMake(0.5,0.5);
-            startPoint.map = _map;
-        }
-        
         GMSCameraUpdate *cameraUpdate = [GMSCameraUpdate fitBounds:[[GMSCoordinateBounds alloc]initWithCoordinate:CLLocationCoordinate2DMake(minLat, minLon) coordinate:CLLocationCoordinate2DMake(maxLat, maxLon)] withPadding:50.0f];
         [_map moveCamera:cameraUpdate];
+        
+        NSString *requestString2 = [[NSString alloc] initWithFormat:@"http://www.xtour.ch/get_start_stop_coordinates_string.php?tid=%@", tourInfo.tourID];
+        NSURL *url2 = [NSURL URLWithString:requestString2];
+        
+        NSURLSession *session2 = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        
+        self.previewSessionTask2 = [session2 dataTaskWithRequest:[NSURLRequest requestWithURL:url2] completionHandler:^(NSData *responseData, NSURLResponse *URLResponse, NSError *error) {
+            XTServerRequestHandler *request2 = [[[XTServerRequestHandler alloc] init] autorelease];
+            
+            NSMutableArray *startStopCoordinates = [request2 GetStartStopCoordinates:(NSData*)responseData];
+            
+            for (int i = 0; i < [startStopCoordinates count]; i++) {
+                GMSMarker *startPoint = [[GMSMarker alloc] init];
+                
+                CLLocation *segmentLocation = [startStopCoordinates objectAtIndex:i];
+                
+                if (i==0) {
+                    startPoint.position = CLLocationCoordinate2DMake(segmentLocation.coordinate.latitude, segmentLocation.coordinate.longitude);
+                    startPoint.icon = [UIImage imageNamed:@"markerIcon_green@3x.png"];
+                    startPoint.groundAnchor = CGPointMake(0.5,0.5);
+                    startPoint.map = _map;
+                }
+                else if (i==[startStopCoordinates count]-1) {
+                    startPoint.position = CLLocationCoordinate2DMake(segmentLocation.coordinate.latitude, segmentLocation.coordinate.longitude);
+                    startPoint.icon = [UIImage imageNamed:@"markerIcon_red@3x.png"];
+                    startPoint.groundAnchor = CGPointMake(0.5,0.5);
+                    startPoint.map = _map;
+                }
+                else {
+                    startPoint.position = CLLocationCoordinate2DMake(segmentLocation.coordinate.latitude, segmentLocation.coordinate.longitude);
+                    startPoint.icon = [UIImage imageNamed:@"markerIcon_gray@3x.png"];
+                    startPoint.groundAnchor = CGPointMake(0.5,0.5);
+                    startPoint.map = _map;
+                }
+            }
+        }];
+        
+        [self.previewSessionTask2 resume];
     }];
     
     [self.previewSessionTask resume];
@@ -1183,13 +1201,20 @@ static NSString * const reuseIdentifier = @"Cell";
         
         //[[UIApplication sharedApplication].keyWindow addSubview:navigationView.backButton];
         
-        XTNavigationViewContainer *lastNavigationViewContainer = [self lastNavigationViewContainer];
+        //XTNavigationViewContainer *lastNavigationViewContainer = [self lastNavigationViewContainer];
         
-        [lastNavigationViewContainer.view addSubview:navigationView.view];
+        [self.view addSubview:navigationView.view];
+        
+        //[lastNavigationViewContainer.view addSubview:navigationView.view];
         
         //[self.view addSubview:navigationView.view];
         
         [navigationView ShowView];
+        [navigationView.loginButton setImage:nil forState:UIControlStateNormal];
+        [navigationView.loginButton setBackgroundImage:[UIImage imageNamed:@"dots_icon_white@3x.png"] forState:UIControlStateNormal];
+        [navigationView.loginButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+        [navigationView.loginButton addTarget:self action:@selector(ShowOptionsWithNoDetail:) forControlEvents:UIControlEventTouchUpInside];
+        [navigationView.loginButton setTag:buttonIndex];
         
         [detailView LoadTourDetail:currentElement fromServer:YES];
         

@@ -132,6 +132,8 @@
         });
     });
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SummaryViewDismissed" object:nil userInfo:nil];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

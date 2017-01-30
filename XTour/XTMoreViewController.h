@@ -20,7 +20,6 @@
 @interface XTMoreViewController : UIViewController <UIActionSheetDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     XTDataSingleton *data;
-    XTLoginViewController *login;
     XTNavigationViewContainer *navigationView;
 }
 
@@ -30,10 +29,6 @@
 @property(nonatomic,retain) NSDictionary *listOfFiles;
 @property(nonatomic,retain) NSDictionary *listOfIcons;
 @property(nonatomic,retain) NSArray *sectionTitles;
-@property (retain, nonatomic) IBOutlet UIButton *loginButton;
 @property(nonatomic,retain) UIView *detailView;
-- (void)LoadLogin:(id)sender;
-- (void)ShowLoginOptions:(id)sender;
-- (void)LoginViewDidClose:(id)sender;
 
 @end

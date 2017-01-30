@@ -36,6 +36,7 @@
     if (!_profileSettings) {_profileSettings = [[XTSettings alloc] init];}
     if (!_pathSegments) {_pathSegments = [[NSMutableArray alloc] init];}
     if (!_pathSegmentsPath) {_pathSegmentsPath = [[NSMutableArray alloc] init];}
+    if (!_segmentCoordinates) {_segmentCoordinates = [[NSMutableArray alloc] init];}
     [_locationData removeAllObjects];
     _StartLocation = nil;
     _CurrentLocation = 0;
@@ -82,6 +83,7 @@
     _photoCount = 0;
     _lastRunIndex = 0;
     _runStatus = 0;
+    _runModus = 0;
     _lowBatteryLevel = false;
     _followTourInfo = nil;
 }
@@ -115,6 +117,7 @@
     [_warningInfo removeAllObjects];
     [_pathSegments removeAllObjects];
     [_pathSegmentsPath removeAllObjects];
+    [_segmentCoordinates removeAllObjects];
     _StartLocation = nil;
     _totalDistance = 0.0;
     _totalAltitude = 0.0;
@@ -486,6 +489,9 @@
     if ([category isEqualToString:@"up"]) {count = _upCount;}
     if ([category isEqualToString:@"down"]) {count = _downCount;}
     if ([category isEqualToString:@"sum"]) {count = 0;}
+    
+    [_segmentCoordinates addObject:[_locationData objectAtIndex:_lastRunIndex]];
+    [_segmentCoordinates addObject:[_locationData lastObject]];
     
     NSString *FileName = [NSString stringWithFormat:@"/tours/%@_%@%i.gpx", _tourID, category, (int)count];
     

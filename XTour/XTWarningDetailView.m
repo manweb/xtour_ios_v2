@@ -120,7 +120,7 @@
 
 - (void) LoadInfo:(XTWarningsInfo *)warningsInfo withFrame:(CGRect)frame
 {
-    _cellView.frame = CGRectMake(frame.origin.x, frame.origin.y+70, frame.size.width, frame.size.height);
+    _cellView.frame = CGRectMake(frame.origin.x, frame.origin.y+21, frame.size.width, frame.size.height);
     
     [_cellView setHidden:NO];
     

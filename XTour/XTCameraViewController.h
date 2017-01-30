@@ -19,12 +19,10 @@
 @interface XTCameraViewController : UICollectionViewController <UIActionSheetDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 {
     XTDataSingleton *data;
-    XTLoginViewController *login;
 }
 
 @property(retain, nonatomic) NSMutableArray *ImageArray;
 @property(retain, nonatomic) UIButton *CameraIcon;
-@property(retain, nonatomic) UIButton *loginButton;
 @property(retain, nonatomic) UIImagePickerController *ImagePicker;
 @property(retain, nonatomic) UIImageView *selectedImageView;
 @property(retain, nonatomic) UIImageView *background;
@@ -38,8 +36,5 @@
 @property(nonatomic) BOOL didPickImage;
 
 - (void) LoadCamera:(id)sender;
-- (void) LoadLogin:(id)sender;
-- (void)ShowLoginOptions:(id)sender;
-- (void)LoginViewDidClose:(id)sender;
 
 @end

@@ -19,21 +19,18 @@
 @interface XTWarnigsViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIActionSheetDelegate>
 {
     XTDataSingleton *data;
-    XTLoginViewController *login;
     UIRefreshControl *refreshControl;
     XTWarningDetailView *warningDetailView;
 }
 
 @property (retain, nonatomic) UIView *header;
 @property (retain, nonatomic) UIView *header_shadow;
-@property (retain, nonatomic) UIButton *loginButton;
 @property (retain, nonatomic) NSMutableArray *warningsArray;
 @property (retain, nonatomic) NSMutableArray *categories;
 @property (retain, nonatomic) UIView *noConnectionView;
 @property (retain, nonatomic) UIView *noWarningsView;
 @property (retain, nonatomic) UITextView *messageLbl;
 
-- (void)LoadLogin:(id)sender;
 - (void)UpdateWarnings:(id)sender;
 
 @end

@@ -60,10 +60,11 @@
 @property (retain, nonatomic) CLGeocoder *geocoder;
 @property (retain, nonatomic) CLPlacemark *placemark;
 @property (retain, nonatomic) IBOutlet UIButton *StartButton;
-@property (retain, nonatomic) IBOutlet UIButton *StopButton;
-@property (retain, nonatomic) IBOutlet UIButton *PauseButton;
+@property (retain, nonatomic) IBOutlet UIButton *ModusButton;
+@property (retain, nonatomic) IBOutlet UIButton *FinishButton;
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
-@property (retain, nonatomic) IBOutlet UIView *PauseButtonBackground;
+@property (retain, nonatomic) IBOutlet UIView *HorizontalDevider;
+@property (retain, nonatomic) IBOutlet UIView *VerticalDevider;
 @property (retain, nonatomic) IBOutlet UIImageView *GPSSignal;
 @property (retain, nonatomic) NSTimer *pollingTimer;
 @property (retain, nonatomic) NSTimer *locationStartTimer;
@@ -125,9 +126,9 @@
 @property (nonatomic) double PauseButtonWidthSmall;
 @property (nonatomic) double PauseButtonHeightSmall;
 
-- (IBAction)startUpTour:(id)sender;
-- (IBAction)startDownTour:(id)sender;
-- (IBAction)pauseTour:(id)sender;
+- (IBAction)startTour:(id)sender;
+- (IBAction)changeTourModus:(id)sender;
+- (IBAction)finishTour:(id)sender;
 - (void)startLocationUpdate;
 - (void)stopLocationUpdate:(bool)saveLocation;
 - (void)stopLocationUpdate;

@@ -920,16 +920,8 @@
     //[_StartButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_button.png",_up_button_icon]] forState:UIControlStateNormal];
     //[_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_button.png",_down_button_icon]] forState:UIControlStateNormal];
     
-    if (data.runModus == 0) {
-        [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_icon v2.png",_up_button_icon]] forState:UIControlStateNormal];
-        
-        _polyline.strokeColor = [UIColor colorWithRed:41.0f/255.0f green:127.0f/255.0f blue:199.0f/255.0f alpha:1.0f];
-    }
-    else {
-        [_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_icon v2.png",_down_button_icon]] forState:UIControlStateNormal];
-        
-        _polyline.strokeColor = [UIColor colorWithRed:199.0f/255.0f green:74.0f/255.0f blue:41.0f/255.0f alpha:1.0f];
-    }
+    if (data.runModus == 0) {[_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_up_icon v2.png",_up_button_icon]] forState:UIControlStateNormal];}
+    else {[_ModusButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_down_icon v2.png",_down_button_icon]] forState:UIControlStateNormal];}
     
     /*if (data.upCount > 0 && data.downCount > 0 && [_totalTimeLabel isHidden]) {
         [_totalTimeLabel setHidden:NO];
@@ -1232,7 +1224,9 @@
         data.DistanceRate = diffDistance/data.rateTimer * 3600.0;
         data.AltitudeRate = diffAltitude/data.rateTimer * 3600.0;
         
-        NSString *r_dist_str = [NSString stringWithFormat:@"%.1f km/h", data.DistanceRate];
+        NSString *r_dist_str;
+        if (data.DistanceRate >= 10) {r_dist_str = [NSString stringWithFormat:@"%.0f km/h", data.DistanceRate];}
+        else {r_dist_str = [NSString stringWithFormat:@"%.1f km/h", data.DistanceRate];}
         
         NSString *r_alt_str;
         if (data.AltitudeRate > 1000) {r_alt_str = [NSString stringWithFormat:@"%.1f km/h", data.AltitudeRate*1000];}
@@ -1346,6 +1340,8 @@
     data.followTourInfo = nil;
     
     [self RedrawTracks];
+    
+    [_StartButton setImage:[UIImage imageNamed:@"start_button v3.png"] forState:UIControlStateNormal];
     
     [_FinishButton setHidden:YES];
 }
@@ -1691,6 +1687,9 @@
             
             [_path removeAllCoordinates];
             pathSize = 0;
+            
+            if (data.runModus == 0) {_polyline.strokeColor = [UIColor colorWithRed:41.0f/255.0f green:127.0f/255.0f blue:199.0f/255.0f alpha:1.0f];}
+            else {_polyline.strokeColor = [UIColor colorWithRed:199.0f/255.0f green:74.0f/255.0f blue:41.0f/255.0f alpha:1.0f];}
         }
         
         if (!(coordinateSize > pathSize)) {return;}

@@ -437,7 +437,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     cell.title.text = [NSString stringWithFormat:@"%@ am %@",currentElement.userName, formattedDate];
     cell.time.text = TimeString;
-    cell.altitude.text = [NSString stringWithFormat:@"%.1f m", currentElement.altitude];
+    if (currentElement.altitude < 100.0) {cell.altitude.text = [NSString stringWithFormat:@"%.1f m", currentElement.altitude];}
+    else {cell.altitude.text = [NSString stringWithFormat:@"%.0f m", currentElement.altitude];}
     cell.distance.text = [NSString stringWithFormat:@"%.2f km", currentElement.distance];
     cell.tourDescription.text = currentElement.tourDescription;
     
@@ -506,6 +507,8 @@ static NSString * const reuseIdentifier = @"Cell";
     //[self.view addSubview:navigationView.view];
     
     [navigationView ShowView];
+    
+    [navigationView.loginButton setHidden:NO];
     
     [navigationView.loginButton setImage:nil forState:UIControlStateNormal];
     [navigationView.loginButton setBackgroundImage:[UIImage imageNamed:@"dots_icon_white@3x.png"] forState:UIControlStateNormal];

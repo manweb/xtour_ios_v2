@@ -64,6 +64,8 @@
         
         [_header addSubview:_loginButton];
         
+        [_loginButton setHidden:YES];
+        
         [self.view addSubview:_contentView];
         [self.view addSubview:_header_background];
         [self.view addSubview:_header];

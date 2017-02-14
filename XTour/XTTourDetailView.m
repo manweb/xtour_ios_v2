@@ -345,23 +345,25 @@
     NSString *distanceUnit = @"km";
     NSString *speedUnit = @"km/h";
     
-    if (distance < 10.0) {
+    if (distance < 1.0) {
         distance *= 1000.0;
         distanceUnit = @"m";
     }
     
-    if (speed < 10.0) {
+    if (speed < 1.0) {
         speed *= 1000.0;
         speedUnit = @"m/h";
     }
     
     _TimeLabel.text = TimeString;
-    _DistanceLabel.text = [NSString stringWithFormat:@"%.1f %@", distance, distanceUnit];
-    _SpeedLabel.text = [NSString stringWithFormat:@"%.1f %@", speed, speedUnit];
-    _UpLabel.text = [NSString stringWithFormat:@"%.1f m", tourInfo.altitude];
-    _DownLabel.text = [NSString stringWithFormat:@"%.1f m", tourInfo.descent];
-    _HighestPointLabel.text = [NSString stringWithFormat:@"%.1f m", tourInfo.highestPoint];
-    _LowestPointLabel.text = [NSString stringWithFormat:@"%.1f m", tourInfo.lowestPoint];
+    if (distance < 1.0) {_DistanceLabel.text = [NSString stringWithFormat:@"%.0f %@", distance, distanceUnit];}
+    else {_DistanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, distanceUnit];}
+    if (speed < 1.0) {_SpeedLabel.text = [NSString stringWithFormat:@"%.0f %@", speed, speedUnit];}
+    else {_SpeedLabel.text = [NSString stringWithFormat:@"%.1f %@", speed, speedUnit];}
+    _UpLabel.text = [NSString stringWithFormat:@"%.0f m", tourInfo.altitude];
+    _DownLabel.text = [NSString stringWithFormat:@"%.0f m", tourInfo.descent];
+    _HighestPointLabel.text = [NSString stringWithFormat:@"%.0f m", tourInfo.highestPoint];
+    _LowestPointLabel.text = [NSString stringWithFormat:@"%.0f m", tourInfo.lowestPoint];
     
     _descriptionView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, boxWidth-10, 190)];
     
